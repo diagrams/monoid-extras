@@ -23,5 +23,4 @@ library
   build-depends:     base >= 4.3,
                      semigroups >= 0.8 && < 0.9
 
-  -- Directories containing source files.
-  hs-source-dirs:      src
+  hs-source-dirs:    src
