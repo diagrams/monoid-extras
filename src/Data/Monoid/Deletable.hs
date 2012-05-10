@@ -1,3 +1,5 @@
+{-# LANGUAGE DeriveFunctor
+  #-}
 
 -----------------------------------------------------------------------------
 -- |
@@ -51,8 +53,6 @@ import Data.Semigroup
 
 data Deletable m = Deletable Int m Int
   deriving Functor
-
-type instance V (Deletable m) = V m
 
 -- | Project the wrapped value out of a `Deletable` value.
 unDelete :: Deletable m -> m

@@ -1,3 +1,6 @@
+{-# LANGUAGE MultiParamTypeClasses
+           , FlexibleInstances
+  #-}
 
 -----------------------------------------------------------------------------
 -- |

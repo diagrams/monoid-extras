@@ -1,3 +1,7 @@
+{-# LANGUAGE TypeOperators
+           , FlexibleInstances
+           , MultiParamTypeClasses
+  #-}
 
 -----------------------------------------------------------------------------
 -- |
@@ -10,7 +14,7 @@
 --
 -----------------------------------------------------------------------------
 
-module Data.Monoid.Action
+module Data.Monoid.Coproduct
        ( (:+:)
        , inL, inR
        , mappendL, mappendR
@@ -19,6 +23,7 @@ module Data.Monoid.Action
 
        ) where
 
+import Data.Either (lefts, rights)
 import Data.Semigroup
 
 import Data.Monoid.Action
