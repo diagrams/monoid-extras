@@ -20,7 +20,7 @@ import qualified Prelude as P
 import           Prelude hiding (minimum)
 
 data PosInf a = Finite a | PosInfty
-  deriving (Eq, Ord)
+  deriving (Eq, Ord, Show)
 
 instance Ord a => Semigroup (PosInf a) where
   (<>) = min
