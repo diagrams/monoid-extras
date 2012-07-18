@@ -6,6 +6,7 @@ description:         Various extra monoid-related definitions and utilities,
                      monoids, and "split" monoids.
 license:             BSD3
 license-file:        LICENSE
+extra-source-files:  CHANGES
 author:              Brent Yorgey
 maintainer:          diagrams-discuss@googlegroups.com
 category:            Data
@@ -21,7 +22,7 @@ library
                      Data.Monoid.Split,
                      Data.Monoid.WithSemigroup
 
-  build-depends:     base >= 4.3,
+  build-depends:     base >= 4.3 && < 4.6,
                      semigroups >= 0.8 && < 0.9
 
   hs-source-dirs:    src
