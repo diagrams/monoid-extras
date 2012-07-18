@@ -20,7 +20,7 @@
 -----------------------------------------------------------------------------
 
 module Data.Monoid.Split
-       ( Split(..), split
+       ( Split(..), split, unsplit
 
        ) where
 
@@ -51,6 +51,12 @@ instance (Semigroup m, Monoid m) => Monoid (Split m) where
 -- | A convenient name for @mempty :| mempty@, so @a \<\> split \<\> b == a :| b@.
 split :: Monoid m => Split m
 split = mempty :| mempty
+
+-- | \"Unsplit\" a split monoid value, combining the two values into
+--   one (or returning the single value if there is no split).
+unsplit :: Semigroup m => Split m -> m
+unsplit (M m)      = m
+unsplit (m1 :| m2) = m1 <> m2
 
 -- | By default, the action of a split monoid is the same as for
 --   the underlying monoid, as if the split were removed.
