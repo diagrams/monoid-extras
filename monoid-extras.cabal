@@ -22,7 +22,7 @@ library
                      Data.Monoid.Split,
                      Data.Monoid.WithSemigroup
 
-  build-depends:     base >= 4.3 && < 4.6,
+  build-depends:     base >= 4.3 && < 4.7,
                      semigroups >= 0.8 && < 0.9
 
   hs-source-dirs:    src
