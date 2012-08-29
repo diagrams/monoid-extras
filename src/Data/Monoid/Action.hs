@@ -54,3 +54,11 @@ class Action m s where
 instance Action m s => Action (Option m) s where
   act (Option Nothing)  s = s
   act (Option (Just m)) s = act m s
+
+-- | Actions operate elementwise on pairs.
+instance (Action m a, Action m b) => Action m (a,b) where
+  act m (a,b) = (act m a, act m b)
+
+-- | Actions operate elementwise on triples.
+instance (Action m a, Action m b, Action m c) => Action m (a,b,c) where
+  act m (a,b,c) = (act m a, act m b, act m c)
