@@ -31,7 +31,7 @@ import Data.Semigroup
 --
 --   * @act (m1 ``mappend`` m2) = act m1 . act m2@
 --
---   Semigroup instances are required to satisfy the same law but with
+--   Semigroup instances are required to satisfy the second law but with
 --   '(<>)' instead of 'mappend'.  Additionally, if the type @s@ has
 --   any algebraic structure, @act m@ should be a homomorphism.  For
 --   example, if @s@ is also a monoid we should have @act m mempty =
