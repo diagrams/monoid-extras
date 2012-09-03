@@ -1,3 +1,9 @@
+* 0.2.0.0
+
+  - Remove instances for actions on pairs and triples, and add some
+    commentary explaining why adding them was a bad idea in the first
+    place.
+
 * 0.1.1.0
 
   - Add instances for actions on pairs and triples
