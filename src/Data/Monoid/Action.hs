@@ -44,6 +44,16 @@ import Data.Semigroup
 --   > instance Action M s
 --
 --   with no method implementations.
+--
+--   It is a bit awkward dealing with instances of @Action@, since it
+--   is a multi-parameter type class but we can't add any functional
+--   dependencies---the relationship between monoids and the types on
+--   which they act is truly many-to-many.  In practice, this library
+--   has chosen to have instance selection for @Action@ driven by the
+--   /first/ type parameter.  That is, you should never write an
+--   instance of the form @Action m SomeType@ since it will overlap
+--   with instances of the form @Action SomeMonoid t@.  Newtype
+--   wrappers can be used to (awkwardly) get around this.
 class Action m s where
 
   -- | Convert a value of type @m@ to an action on @s@ values.
@@ -54,11 +64,3 @@ class Action m s where
 instance Action m s => Action (Option m) s where
   act (Option Nothing)  s = s
   act (Option (Just m)) s = act m s
-
--- | Actions operate elementwise on pairs.
-instance (Action m a, Action m b) => Action m (a,b) where
-  act m (a,b) = (act m a, act m b)
-
--- | Actions operate elementwise on triples.
-instance (Action m a, Action m b, Action m c) => Action m (a,b,c) where
-  act m (a,b,c) = (act m a, act m b, act m c)
