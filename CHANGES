@@ -1,4 +1,4 @@
-* 0.2.0.0
+* 0.2.0.0: 3 September 2012
 
   - Remove instances for actions on pairs and triples, and add some
     commentary explaining why adding them was a bad idea in the first
