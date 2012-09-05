@@ -34,6 +34,7 @@ infix 5 :|
 --   @m@'s separated by a divider.
 data Split m = M m
              | m :| m
+  deriving (Show)
 
 -- | If @m@ is a @Semigroup@, then @Split m@ is a semigroup which
 --   combines values on either side of a split, keeping only the
