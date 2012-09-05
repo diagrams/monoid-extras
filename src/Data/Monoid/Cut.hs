@@ -34,6 +34,7 @@ infix 5 :||:
 --   one and throwing away all the information in between.
 data Cut m = Uncut m
            | m :||: m
+  deriving (Show)
 
 -- | If @m@ is a @Semigroup@, then @Cut m@ is a semigroup which
 --   contains @m@ as a sub-semigroup, but also contains elements of
