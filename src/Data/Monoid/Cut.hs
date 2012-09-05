@@ -20,8 +20,6 @@ module Data.Monoid.Cut
 
 import Data.Semigroup
 
-import Data.Monoid.Action
-
 infix 5 :||:
 
 -- | A value of type @Cut m@ is either a single @m@, or a pair of
