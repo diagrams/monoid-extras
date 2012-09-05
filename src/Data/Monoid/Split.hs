@@ -49,7 +49,8 @@ instance (Semigroup m, Monoid m) => Monoid (Split m) where
   mempty  = M mempty
   mappend = (<>)
 
--- | A convenient name for @mempty :| mempty@, so @a \<\> split \<\> b == a :| b@.
+-- | A convenient name for @mempty :| mempty@, so @M a \<\> split \<\>
+--   M b == a :| b@.
 split :: Monoid m => Split m
 split = mempty :| mempty
 
