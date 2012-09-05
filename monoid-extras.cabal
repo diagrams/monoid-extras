@@ -3,7 +3,7 @@ version:             0.2.0.0
 synopsis:            Various extra monoid-related definitions and utilities
 description:         Various extra monoid-related definitions and utilities,
                      such as monoid actions, monoid coproducts, "deletable"
-                     monoids, and "split" monoids.
+                     monoids, "split" monoids, and "cut" monoids.
 license:             BSD3
 license-file:        LICENSE
 extra-source-files:  CHANGES
@@ -22,6 +22,7 @@ library
   default-language:  Haskell2010
   exposed-modules:   Data.Monoid.Action,
                      Data.Monoid.Coproduct,
+                     Data.Monoid.Cut,
                      Data.Monoid.Deletable,
                      Data.Monoid.MList,
                      Data.Monoid.PosInf,
