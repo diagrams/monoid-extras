@@ -11,11 +11,14 @@
 --
 -- Sometimes we want to accumulate values from some monoid, but have
 -- the ability to introduce a \"split\" which separates values on
--- either side.  For example, in the diagrams graphics framework this
--- is used when accumulating transformations to be applied to
--- primitive diagrams: the 'freeze' operation introduces a split,
--- since only transformations occurring outside the freeze should be
--- applied to attributes.
+-- either side.  Only the rightmost split is kept.  For example,
+--
+-- > a b c | d e | f g h == a b c d e | f g h
+--
+-- In the diagrams graphics framework this is used when accumulating
+-- transformations to be applied to primitive diagrams: the 'freeze'
+-- operation introduces a split, since only transformations occurring
+-- outside the freeze should be applied to attributes.
 --
 -----------------------------------------------------------------------------
 
@@ -31,7 +34,18 @@ import Data.Monoid.Action
 infix 5 :|
 
 -- | A value of type @Split m@ is either a single @m@, or a pair of
---   @m@'s separated by a divider.
+--   @m@'s separated by a divider.  Single @m@'s combine as usual;
+--   single @m@'s combine with split values by combining with the
+--   value on the appropriate side; when two split values meet only
+--   the rightmost split is kept, with both the values from the left
+--   split combining with the left-hand value of the right split.
+--
+--   "Data.Monoid.Cut" is similar, but uses a different scheme for
+--   composition.  @Split@ uses the asymmetric constructor @:|@, and
+--   @Cut@ the symmetric constructor @:||:@, to emphasize the inherent
+--   asymmetry of @Split@ and symmetry of @Cut@.  @Split@ keeps only
+--   the rightmost split and combines everything on the left; @Cut@
+--   keeps the outermost splits and throws away everything in between.
 data Split m = M m
              | m :| m
   deriving (Show)
