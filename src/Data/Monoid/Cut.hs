@@ -32,6 +32,12 @@ infix 5 :||:
 --   rightmost divider and accumulates all values, whereas cut always
 --   keeps the leftmost and rightmost divider, coalescing them into
 --   one and throwing away all the information in between.
+--
+--   @Split@ uses the asymmetric constructor @:|@, and @Cut@ the
+--   symmetric constructor @:||:@, to emphasize the inherent asymmetry
+--   of @Split@ and symmetry of @Cut@.  @Split@ keeps only the
+--   rightmost split and combines everything on the left; @Cut@ keeps
+--   the outermost splits and throws away everything in between.
 data Cut m = Uncut m
            | m :||: m
   deriving (Show)
