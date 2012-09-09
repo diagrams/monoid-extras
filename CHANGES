@@ -1,3 +1,9 @@
+* 0.2.1.0: XXX
+
+  - Add new module Data.Monoid.Cut
+  - Documentation improvements
+  - Add Show instance for Split
+
 * 0.2.0.0: 3 September 2012
 
   - Remove instances for actions on pairs and triples, and add some
