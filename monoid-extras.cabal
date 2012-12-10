@@ -1,5 +1,5 @@
 name:                monoid-extras
-version:             0.2.1.0
+version:             0.2.2.0
 synopsis:            Various extra monoid-related definitions and utilities
 description:         Various extra monoid-related definitions and utilities,
                      such as monoid actions, monoid coproducts, \"deletable\"
@@ -26,6 +26,7 @@ library
                      Data.Monoid.Deletable,
                      Data.Monoid.MList,
                      Data.Monoid.PosInf,
+                     Data.Monoid.Recommend,
                      Data.Monoid.Split,
                      Data.Monoid.WithSemigroup
 
