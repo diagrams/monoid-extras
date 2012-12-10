@@ -2,8 +2,8 @@ name:                monoid-extras
 version:             0.2.1.0
 synopsis:            Various extra monoid-related definitions and utilities
 description:         Various extra monoid-related definitions and utilities,
-                     such as monoid actions, monoid coproducts, "deletable"
-                     monoids, "split" monoids, and "cut" monoids.
+                     such as monoid actions, monoid coproducts, \"deletable\"
+                     monoids, \"split\" monoids, and \"cut\" monoids.
 license:             BSD3
 license-file:        LICENSE
 extra-source-files:  CHANGES
