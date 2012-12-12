@@ -1,5 +1,6 @@
 {-# LANGUAGE TypeOperators
            , MultiParamTypeClasses
+           , TypeSynonymInstances
            , FlexibleInstances
            , OverlappingInstances
            , UndecidableInstances
