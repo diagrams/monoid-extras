@@ -1,5 +1,5 @@
 name:                monoid-extras
-version:             0.2.2.1
+version:             0.2.2.2
 synopsis:            Various extra monoid-related definitions and utilities
 description:         Various extra monoid-related definitions and utilities,
                      such as monoid actions, monoid coproducts, \"deletable\"
@@ -31,7 +31,7 @@ library
                      Data.Monoid.WithSemigroup
 
   build-depends:     base >= 4.3 && < 4.7,
-                     semigroups >= 0.8 && < 0.9
+                     semigroups >= 0.8 && < 0.10
 
   hs-source-dirs:    src
 
