@@ -7,13 +7,17 @@
 -- Maintainer  :  diagrams-discuss@googlegroups.com
 --
 -- Make a semigroup under 'min' into a monoid by adjoining an element
--- corresponding to positive infinity.
+-- corresponding to positive infinity (and similarly for 'max' with a negative
+-- infinity). These types are similar to @Option (Min a)@ and @Option (Max a)@
+-- respectively, except that the 'Ord' instance matches the 'Monoid' instance.
 --
 -----------------------------------------------------------------------------
 
 module Data.Monoid.Inf
        ( Inf(..)
+       , PosInf, NegInf
        , minimum, maximum
+       -- * Type-restricted constructors
        , posInfty, negInfty
        , posFinite, negFinite
        ) where
@@ -25,7 +29,6 @@ import           Prelude hiding (minimum, maximum)
 data Pos
 data Neg
 
--- | Affix a (positive or negative) infinity to a type.
 data Inf p a = Infinity | Finite a
   deriving (Eq, Show, Read)
 
