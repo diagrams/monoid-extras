@@ -30,7 +30,7 @@ library
                      Data.Monoid.Split,
                      Data.Monoid.WithSemigroup
 
-  build-depends:     base >= 4.3 && < 4.7,
+  build-depends:     base >= 4.3 && < 4.8,
                      semigroups >= 0.8 && < 0.10
 
   hs-source-dirs:    src
