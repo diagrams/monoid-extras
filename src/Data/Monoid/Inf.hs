@@ -1,15 +1,16 @@
 {-# LANGUAGE FlexibleInstances #-}
 -----------------------------------------------------------------------------
 -- |
--- Module      :  Data.Monoid.PosInf
+-- Module      :  Data.Monoid.Inf
 -- Copyright   :  (c) 2012 diagrams-core team (see LICENSE)
 -- License     :  BSD-style (see LICENSE)
 -- Maintainer  :  diagrams-discuss@googlegroups.com
 --
--- Make a semigroup under 'min' into a monoid by adjoining an element
--- corresponding to positive infinity (and similarly for 'max' with a negative
--- infinity). These types are similar to @Option (Min a)@ and @Option (Max a)@
--- respectively, except that the 'Ord' instance matches the 'Monoid' instance.
+-- Make semigroup under 'min' or 'max' into monoids by adjoining an
+-- element corresponding to infinity (positive or negative,
+-- respectively). These types are similar to @Option (Min a)@ and
+-- @Option (Max a)@ respectively, except that the 'Ord' instance
+-- matches the 'Monoid' instance.
 --
 -----------------------------------------------------------------------------
 
