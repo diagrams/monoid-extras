@@ -1,3 +1,7 @@
+{-# LANGUAGE DeriveFoldable    #-}
+{-# LANGUAGE DeriveFunctor     #-}
+{-# LANGUAGE DeriveTraversable #-}
+{-# LANGUAGE EmptyDataDecls    #-}
 {-# LANGUAGE FlexibleInstances #-}
 -----------------------------------------------------------------------------
 -- |
@@ -24,14 +28,17 @@ module Data.Monoid.Inf
        ) where
 
 import           Data.Semigroup
-import qualified Prelude as P
-import           Prelude hiding (minimum, maximum)
+import           Prelude          hiding (maximum, minimum)
+import qualified Prelude          as P
+
+import           Data.Foldable    (Foldable)
+import           Data.Traversable (Traversable)
 
 data Pos
 data Neg
 
 data Inf p a = Infinity | Finite a
-  deriving (Eq, Show, Read)
+  deriving (Eq, Show, Read, Functor, Foldable, Traversable)
 
 type PosInf a = Inf Pos a
 type NegInf a = Inf Neg a
