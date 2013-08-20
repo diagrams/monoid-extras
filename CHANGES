@@ -1,3 +1,8 @@
+* 0.3.1: 20 August 2013
+
+  - new module Data.Monoid.Endomorphism
+  - add derived Functor, Foldable, and Traversable instances for Data.Monoid.Inf.Inf
+
 * 0.3: 2 May 2013
 
   - generalize PosInf to Inf, which supports making monoids out of
