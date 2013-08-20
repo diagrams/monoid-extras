@@ -24,6 +24,7 @@ library
                      Data.Monoid.Coproduct,
                      Data.Monoid.Cut,
                      Data.Monoid.Deletable,
+                     Data.Monoid.Endomorphism,
                      Data.Monoid.Inf,
                      Data.Monoid.MList,
                      Data.Monoid.Recommend,
