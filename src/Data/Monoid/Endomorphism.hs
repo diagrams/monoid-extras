@@ -15,6 +15,8 @@ module Data.Monoid.Endomorphism
     where
 
 import           Control.Category
+import           Data.Group
+import           Data.Groupoid
 import           Data.Semigroup
 import           Data.Semigroupoid
 import           Prelude           hiding (id, (.))
@@ -31,3 +33,6 @@ instance Semigroupoid k => Semigroup (Endomorphism k a) where
 instance Category k => Monoid (Endomorphism k a) where
   mempty = Endomorphism id
   Endomorphism a `mappend` Endomorphism b = Endomorphism (a . b)
+
+instance (Category k, Groupoid k) => Group (Endomorphism k a) where
+  invert (Endomorphism a) = Endomorphism (inv a)
