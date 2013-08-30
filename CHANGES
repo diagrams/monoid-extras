@@ -1,3 +1,7 @@
+* 0.3.2: 30 August 2013
+
+  - new Group instance for Endomorphism
+
 * 0.3.1: 20 August 2013
 
   - new module Data.Monoid.Endomorphism
