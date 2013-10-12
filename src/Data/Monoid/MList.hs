@@ -113,9 +113,6 @@ instance (t :>: a) => (:>:) (b ::: t) a where
 --   heterogeneous monoidal lists on each other.
 newtype SM m = SM m
 
-instance Action () l where
-  act _ a = a
-
 instance (Action (SM a) l2, Action l1 l2) => Action (a, l1) l2 where
   act (a,l) = act (SM a) . act l
 
