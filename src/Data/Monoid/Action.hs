@@ -60,6 +60,10 @@ class Action m s where
   act :: m -> s -> s
   act = const id
 
+-- | @()@ acts as the identity.
+instance Action () l where
+  act () = id
+
 -- | @Nothing@ acts as the identity; @Just m@ acts as @m@.
 instance Action m s => Action (Option m) s where
   act (Option Nothing)  s = s
