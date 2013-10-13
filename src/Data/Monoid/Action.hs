@@ -68,3 +68,8 @@ instance Action () l where
 instance Action m s => Action (Option m) s where
   act (Option Nothing)  s = s
   act (Option (Just m)) s = act m s
+
+-- | @Endo@ acts by application.
+instance Action (Endo a) a where
+    act = appEndo
+
