@@ -1,6 +1,5 @@
-{-# LANGUAGE MultiParamTypeClasses
-           , FlexibleInstances
-  #-}
+{-# LANGUAGE FlexibleInstances     #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
 
 -----------------------------------------------------------------------------
 -- |
@@ -17,7 +16,7 @@ module Data.Monoid.Action
        ( Action(..)
        ) where
 
-import Data.Semigroup
+import           Data.Semigroup
 
 ------------------------------------------------------------
 --  Monoid and semigroup actions
@@ -71,5 +70,5 @@ instance Action m s => Action (Option m) s where
 
 -- | @Endo@ acts by application.
 instance Action (Endo a) a where
-    act = appEndo
+  act = appEndo
 
