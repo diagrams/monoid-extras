@@ -69,6 +69,15 @@ instance Action m s => Action (Option m) s where
   act (Option (Just m)) s = act m s
 
 -- | @Endo@ acts by application.
+--
+--   Note that in order for this instance to satisfy the @Action@
+--   laws, whenever the type @a@ has some sort of algebraic structure,
+--   the type @Endo a@ must be considered to represent /homomorphisms/
+--   (structure-preserving maps) on @a@, even though there is no way
+--   to enforce this in the type system.  For example, if @a@ is an
+--   instance of @Monoid@, then one should only use @Endo a@ values
+--   @f@ with the property that @f mempty = mempty@ and @f (a <> b) =
+--   f a <> f b@.
 instance Action (Endo a) a where
   act = appEndo
 
