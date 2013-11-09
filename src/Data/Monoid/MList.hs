@@ -1,12 +1,14 @@
-{-# LANGUAGE TypeOperators
-           , MultiParamTypeClasses
-           , TypeSynonymInstances
-           , FlexibleInstances
-           , OverlappingInstances
-           , UndecidableInstances
-           , TypeFamilies
-           , GeneralizedNewtypeDeriving
-  #-}
+{-# LANGUAGE FlexibleContexts           #-}
+{-# LANGUAGE FlexibleInstances          #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE MultiParamTypeClasses      #-}
+{-# LANGUAGE OverlappingInstances       #-}
+{-# LANGUAGE TypeFamilies               #-}
+{-# LANGUAGE TypeOperators              #-}
+{-# LANGUAGE TypeSynonymInstances       #-}
+{-# LANGUAGE UndecidableInstances       #-}
+
+{-# OPTIONS_GHC -fno-warn-orphans #-}
 
 -----------------------------------------------------------------------------
 -- |
@@ -37,9 +39,9 @@ module Data.Monoid.MList
        , SM(..)
        ) where
 
-import Control.Arrow
-import Data.Monoid.Action
-import Data.Semigroup
+import           Control.Arrow
+import           Data.Monoid.Action
+import           Data.Semigroup
 
 -- $mlist
 --
