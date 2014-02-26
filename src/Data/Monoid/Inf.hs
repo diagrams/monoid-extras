@@ -20,6 +20,7 @@
 
 module Data.Monoid.Inf
        ( Inf(..)
+       , Pos, Neg
        , PosInf, NegInf
        , minimum, maximum
        -- * Type-restricted constructors
