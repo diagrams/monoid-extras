@@ -19,7 +19,7 @@ import           Data.Group
 import           Data.Groupoid
 import           Data.Semigroup
 import           Data.Semigroupoid
-import           Prelude           hiding (id, (.))
+import           Prelude           ()
 
 -- | An 'Endomorphism' in a given 'Category' is a morphism from some
 --   object to itself.  The set of endomorphisms for a particular
