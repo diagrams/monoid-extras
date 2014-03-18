@@ -18,6 +18,7 @@ module Data.Monoid.Coproduct
        ( (:+:)
        , inL, inR
        , mappendL, mappendR
+       , mapL, mapR
        , killL, killR
        , untangle
 
@@ -55,6 +56,20 @@ mappendL = mappend . inL
 -- | Prepend a value from the right monoid.
 mappendR :: n -> m :+: n -> m :+: n
 mappendR = mappend . inR
+
+mapR :: (n -> n) -> m :+: n -> m :+: n
+mapR f (MCo []) = MCo []
+mapR f (MCo (x:xs)) =
+  case x of
+    Left m  -> m `mappendL` mapR f (MCo xs)
+    Right n -> f n `mappendR` mapR f (MCo xs)
+
+mapL :: (m -> m) -> m :+: n -> m :+: n
+mapL f (MCo []) = MCo []
+mapL f (MCo (x:xs)) =
+  case x of
+    Left m -> f m `mappendL` mapL f (MCo xs)
+    Right n  -> n `mappendR` mapL f (MCo xs)
 
 {-
 normalize :: (Monoid m, Monoid n) => m :+: n -> m :+: n
