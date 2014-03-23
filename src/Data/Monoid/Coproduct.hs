@@ -1,7 +1,6 @@
-{-# LANGUAGE TypeOperators
-           , FlexibleInstances
-           , MultiParamTypeClasses
-  #-}
+{-# LANGUAGE FlexibleInstances     #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE TypeOperators         #-}
 
 -----------------------------------------------------------------------------
 -- |
@@ -24,10 +23,10 @@ module Data.Monoid.Coproduct
 
        ) where
 
-import Data.Either (lefts, rights)
-import Data.Semigroup
+import           Data.Either        (lefts, rights)
+import           Data.Semigroup
 
-import Data.Monoid.Action
+import           Data.Monoid.Action
 
 -- | @m :+: n@ is the coproduct of monoids @m@ and @n@.  Values of
 --   type @m :+: n@ consist of alternating lists of @m@ and @n@
@@ -57,19 +56,13 @@ mappendL = mappend . inL
 mappendR :: n -> m :+: n -> m :+: n
 mappendR = mappend . inR
 
-mapR :: (n -> n) -> m :+: n -> m :+: n
-mapR f (MCo []) = MCo []
-mapR f (MCo (x:xs)) =
-  case x of
-    Left m  -> m `mappendL` mapR f (MCo xs)
-    Right n -> f n `mappendR` mapR f (MCo xs)
+mapR :: (Action m n, Monoid m, Monoid n) => (n -> n) -> m :+: n -> m :+: n
+mapR f co = inR (f n) <> inL m
+  where (m,n) = untangle co
 
-mapL :: (m -> m) -> m :+: n -> m :+: n
-mapL f (MCo []) = MCo []
-mapL f (MCo (x:xs)) =
-  case x of
-    Left m -> f m `mappendL` mapL f (MCo xs)
-    Right n  -> n `mappendR` mapL f (MCo xs)
+mapL :: (Action m n, Monoid m, Monoid n) => (m -> m) -> m :+: n -> m :+: n
+mapL f co = inR n <> inL (f m)
+  where (m,n) = untangle co
 
 {-
 normalize :: (Monoid m, Monoid n) => m :+: n -> m :+: n
