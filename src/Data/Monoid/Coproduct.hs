@@ -56,10 +56,18 @@ mappendL = mappend . inL
 mappendR :: n -> m :+: n -> m :+: n
 mappendR = mappend . inR
 
+-- | Map a function (which /must be a monoid homomorphism/) over the
+--   values from the right-hand type.  Calls 'untangle' first to
+--   ensure semantics are preserved (though the precise interleaving
+--   of values is not preserved).
 mapR :: (Action m n, Monoid m, Monoid n) => (n -> n) -> m :+: n -> m :+: n
 mapR f co = inR (f n) <> inL m
   where (m,n) = untangle co
 
+-- | Map a function (which /must be a monoid homomorphism/) over the
+--   values from the left-hand type.  Calls 'untangle' first to ensure
+--   semantics are preserved (though the precise interleaving of
+--   values is not preserved).
 mapL :: (Action m n, Monoid m, Monoid n) => (m -> m) -> m :+: n -> m :+: n
 mapL f co = inR n <> inL (f m)
   where (m,n) = untangle co
