@@ -1,3 +1,7 @@
+* 0.3.3.2: 10 April 2014
+
+  - allow semigroups-0.13
+
 * 0.3.3.1: 9 March 2014
 
   - drop dependency on deprecated `groupoids` package
