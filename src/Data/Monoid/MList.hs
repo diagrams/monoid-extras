@@ -30,7 +30,7 @@ module Data.Monoid.MList
        , MList(..)
 
          -- * Accessing embedded values
-       , (:>:)(..)
+       , (:>:)(..), val'
 
          -- * Monoid actions of heterogeneous lists
 
@@ -39,6 +39,7 @@ module Data.Monoid.MList
        , SM(..)
        ) where
 
+import           Control.Applicative (Applicative(..), (<$>))
 import           Control.Arrow
 import           Data.Monoid.Action
 import           Data.Semigroup
@@ -91,15 +92,31 @@ class l :>: a where
   -- | Alter the value of type @a@ by applying the given function to it.
   alt  :: (Option a -> Option a) -> l -> l
 
+  -- | A lens into @Option a@ from a heterogeneous list.
+  -- This combines 'get' and 'alt'.
+  val  :: Functor f => (Option a -> f (Option a)) -> l -> f l
+
 instance MList t => (:>:) (a ::: t) a where
   inj a = (Option (Just a), empty)
   get   = fst
   alt   = first
+  val f (x, l) = (\x' -> (x', l)) <$> f x
 
 instance (t :>: a) => (:>:) (b ::: t) a where
   inj a = (Option Nothing, inj a)
   get   = get . snd
   alt   = second . alt
+  val f (x, l) = (,) x <$> val f l
+
+-- | Instead of providing a lens into @Option a@, this variant of 'val'
+-- provides a traversal over the value itself.
+--
+-- In lens terms:
+-- @ val' = val._Wrapped._Just @
+val' :: (l :>: a, Applicative f) => (a -> f a) -> l -> f l
+val' f = val f'
+  where f' (Option Nothing)  = pure (Option Nothing)
+        f' (Option (Just x)) = Option . Just <$> f x
 
 -- Monoid actions -----------------------------------------
 
