@@ -19,6 +19,7 @@ module Data.Monoid.Coproduct
        , inL, inR
        , mappendL, mappendR
        , killL, killR
+       , mapL, mapR
        , untangle
 
        ) where
@@ -84,6 +85,21 @@ killR = mconcat . lefts . unMCo
 --   values from the left monoid to the identity.
 killL :: Monoid n => m :+: n -> n
 killL = mconcat . rights . unMCo
+
+-- | @mapL@ maps over the left sides of a coproduct monoid. The passed
+--   function must be a monoid homomorphism.
+mapL :: (m -> m') -> m :+: n -> m' :+: n
+mapL f (MCo xs) = MCo $ map (bimap f id) xs
+
+-- | @mapR@ maps over the right sides of a coproduct monoid. The passed
+--   function must be a monoid homomorphism.
+mapR :: (n -> n') -> m :+: n -> m :+: n'
+mapR f (MCo xs) = MCo $ map (bimap id f) xs
+
+-- Helper function to avoid pulling in bifunctors
+bimap :: (l -> l') -> (r -> r') -> Either l r -> Either l' r'
+bimap f _ (Left  l) = Left  (f l)
+bimap _ g (Right r) = Right (g r)
 
 -- | Take a value from a coproduct monoid where the left monoid has an
 --   action on the right, and \"untangle\" it into a pair of values.  In
