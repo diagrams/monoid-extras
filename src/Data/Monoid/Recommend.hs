@@ -1,3 +1,4 @@
+{-# LANGUAGE DeriveFunctor #-}
 
 -----------------------------------------------------------------------------
 -- |
@@ -19,6 +20,8 @@ module Data.Monoid.Recommend
        ) where
 
 import Data.Semigroup
+import Data.Foldable (Foldable(..))
+import Data.Traversable
 
 -- | A value of type @Recommend a@ consists of a value of type @a@
 --   wrapped up in one of two constructors.  The @Recommend@
@@ -29,6 +32,7 @@ import Data.Semigroup
 --   overriding any @Recommend@ed values.
 data Recommend a = Recommend a
                  | Commit a
+  deriving (Show, Eq, Functor)
 
 -- | Extract the value of type @a@ wrapped in @Recommend a@.
 getRecommend :: Recommend a -> a
@@ -47,3 +51,10 @@ instance Semigroup a => Semigroup (Recommend a) where
 instance (Semigroup a, Monoid a) => Monoid (Recommend a) where
   mappend = (<>)
   mempty  = Recommend mempty
+
+instance Foldable Recommend where
+  foldMap = foldMapDefault
+
+instance Traversable Recommend where
+  traverse f (Commit    a) = fmap Commit    (f a)
+  traverse f (Recommend a) = fmap Recommend (f a)
