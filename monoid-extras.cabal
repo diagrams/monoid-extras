@@ -33,7 +33,7 @@ library
 
   build-depends:     base >= 4.3 && < 4.8,
                      groups < 0.5,
-                     semigroups >= 0.8 && < 0.15,
+                     semigroups >= 0.8 && < 0.16,
                      semigroupoids >= 4.0 && < 5
 
   hs-source-dirs:    src
