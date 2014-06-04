@@ -112,7 +112,7 @@ instance (t :>: a) => (:>:) (b ::: t) a where
 -- provides a traversal over the value itself.
 --
 -- In lens terms:
--- @ val' = val._Wrapped._Just @
+-- @ val' = val._Wrapped'._Just @
 val' :: (l :>: a, Applicative f) => (a -> f a) -> l -> f l
 val' f = val f'
   where f' (Option Nothing)  = pure (Option Nothing)
