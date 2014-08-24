@@ -114,6 +114,7 @@ instance (t :>: a) => (:>:) (b ::: t) a where
 --   guide instance selection when defining the action of
 --   heterogeneous monoidal lists on each other.
 newtype SM m = SM m
+               deriving Show
 
 instance (Action (SM a) l2, Action l1 l2) => Action (a, l1) l2 where
   act (a,l) = act (SM a) . act l

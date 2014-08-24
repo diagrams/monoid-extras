@@ -52,7 +52,7 @@ import Data.Semigroup
 --   * The remaining case is symmetric with the second.
 
 data Deletable m = Deletable Int m Int
-  deriving Functor
+  deriving (Functor, Show)
 
 -- | Project the wrapped value out of a `Deletable` value.
 unDelete :: Deletable m -> m

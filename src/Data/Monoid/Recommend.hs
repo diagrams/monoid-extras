@@ -1,4 +1,3 @@
-
 -----------------------------------------------------------------------------
 -- |
 -- Module      :  Data.Monoid.Recommend
@@ -29,6 +28,7 @@ import Data.Semigroup
 --   overriding any @Recommend@ed values.
 data Recommend a = Recommend a
                  | Commit a
+                   deriving Show
 
 -- | Extract the value of type @a@ wrapped in @Recommend a@.
 getRecommend :: Recommend a -> a
