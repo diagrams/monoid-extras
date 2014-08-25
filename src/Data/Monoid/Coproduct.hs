@@ -34,6 +34,7 @@ import Data.Monoid.Action
 --   concatenation, with appropriate combining of adjacent elements
 --   when possible.
 newtype m :+: n = MCo { unMCo :: [Either m n] }
+                  deriving Show
 
 -- For efficiency and simplicity, we implement it just as [Either m
 -- n]: of course, this does not preserve the invariant of strictly
