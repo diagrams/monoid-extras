@@ -31,7 +31,7 @@ library
                      Data.Monoid.Split,
                      Data.Monoid.WithSemigroup
 
-  build-depends:     base >= 4.3 && < 4.8,
+  build-depends:     base >= 4.3 && < 4.9,
                      groups < 0.5,
                      semigroups >= 0.8 && < 0.17,
                      semigroupoids >= 4.0 && < 5
