@@ -1,5 +1,4 @@
 {-# LANGUAGE FlexibleContexts     #-}
-{-# LANGUAGE DeriveDataTypeable   #-}
 {-# LANGUAGE StandaloneDeriving   #-}
 {-# LANGUAGE UndecidableInstances #-}
 -----------------------------------------------------------------------------
@@ -23,7 +22,6 @@ import           Data.Group
 import           Data.Groupoid
 import           Data.Semigroup
 import           Data.Semigroupoid
-import           Data.Typeable
 import           Prelude           (Show)
 
 -- | An 'Endomorphism' in a given 'Category' is a morphism from some
@@ -31,7 +29,6 @@ import           Prelude           (Show)
 --   object form a monoid, with composition as the combining operation
 --   and the identity morphism as the identity element.
 newtype Endomorphism k a = Endomorphism {getEndomorphism :: k a a}
-  deriving Typeable
 
 deriving instance Show (k a a) => Show (Endomorphism k a)
 
