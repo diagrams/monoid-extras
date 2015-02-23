@@ -1,8 +1,12 @@
+{-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DeriveFoldable     #-}
+{-# LANGUAGE DeriveFunctor      #-}
+{-# LANGUAGE DeriveTraversable  #-}
 
 -----------------------------------------------------------------------------
 -- |
 -- Module      :  Data.Monoid.Cut
--- Copyright   :  (c) 2012 diagrams-core team (see LICENSE)
+-- Copyright   :  (c) 2012-2015 diagrams-core team (see LICENSE)
 -- License     :  BSD-style (see LICENSE)
 -- Maintainer  :  diagrams-discuss@googlegroups.com
 --
@@ -18,7 +22,10 @@ module Data.Monoid.Cut
 
        ) where
 
+import Data.Data
 import Data.Semigroup
+import Data.Foldable
+import Data.Traversable
 
 infix 5 :||:
 
@@ -38,7 +45,7 @@ infix 5 :||:
 --   the outermost splits and throws away everything in between.
 data Cut m = Uncut m
            | m :||: m
-  deriving (Show)
+  deriving (Data, Typeable, Show, Read, Functor, Foldable, Traversable)
 
 -- | If @m@ is a @Semigroup@, then @Cut m@ is a semigroup which
 --   contains @m@ as a sub-semigroup, but also contains elements of

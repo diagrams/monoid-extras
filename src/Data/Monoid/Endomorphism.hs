@@ -1,10 +1,11 @@
-{-# LANGUAGE StandaloneDeriving #-}
-{-# LANGUAGE FlexibleContexts #-}
+{-# LANGUAGE FlexibleContexts     #-}
+{-# LANGUAGE DeriveDataTypeable   #-}
+{-# LANGUAGE StandaloneDeriving   #-}
 {-# LANGUAGE UndecidableInstances #-}
 -----------------------------------------------------------------------------
 -- |
 -- Module      :  Data.Monoid.Endomorphism
--- Copyright   :  (c) 2013 diagrams-core team (see LICENSE)
+-- Copyright   :  (c) 2013-2015 diagrams-core team (see LICENSE)
 -- License     :  BSD-style (see LICENSE)
 -- Maintainer  :  diagrams-discuss@googlegroups.com
 --
@@ -22,6 +23,7 @@ import           Data.Group
 import           Data.Groupoid
 import           Data.Semigroup
 import           Data.Semigroupoid
+import           Data.Typeable
 import           Prelude           (Show)
 
 -- | An 'Endomorphism' in a given 'Category' is a morphism from some
@@ -29,8 +31,9 @@ import           Prelude           (Show)
 --   object form a monoid, with composition as the combining operation
 --   and the identity morphism as the identity element.
 newtype Endomorphism k a = Endomorphism {getEndomorphism :: k a a}
+  deriving Typeable
 
-deriving instance Show (k a a) =>  Show (Endomorphism k a)
+deriving instance Show (k a a) => Show (Endomorphism k a)
 
 instance Semigroupoid k => Semigroup (Endomorphism k a) where
   Endomorphism a <> Endomorphism b = Endomorphism (a `o` b)

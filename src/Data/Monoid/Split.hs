@@ -1,11 +1,14 @@
-{-# LANGUAGE FlexibleInstances
-           , MultiParamTypeClasses
-  #-}
+{-# LANGUAGE DeriveDataTypeable    #-}
+{-# LANGUAGE DeriveFoldable        #-}
+{-# LANGUAGE DeriveFunctor         #-}
+{-# LANGUAGE DeriveTraversable     #-}
+{-# LANGUAGE FlexibleInstances     #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
 
 -----------------------------------------------------------------------------
 -- |
 -- Module      :  Data.Monoid.Split
--- Copyright   :  (c) 2011 diagrams-core team (see LICENSE)
+-- Copyright   :  (c) 2011-2015 diagrams-core team (see LICENSE)
 -- License     :  BSD-style (see LICENSE)
 -- Maintainer  :  diagrams-discuss@googlegroups.com
 --
@@ -23,11 +26,16 @@
 -----------------------------------------------------------------------------
 
 module Data.Monoid.Split
-       ( Split(..), split, unsplit
+       ( Split(..)
+       , split
+       , unsplit
 
        ) where
 
+import Data.Data
+import Data.Foldable
 import Data.Semigroup
+import Data.Traversable
 
 import Data.Monoid.Action
 
@@ -48,7 +56,7 @@ infix 5 :|
 --   keeps the outermost splits and throws away everything in between.
 data Split m = M m
              | m :| m
-  deriving (Show)
+  deriving (Data, Typeable, Show, Read, Eq, Functor, Foldable, Traversable)
 
 -- | If @m@ is a @Semigroup@, then @Split m@ is a semigroup which
 --   combines values on either side of a split, keeping only the
