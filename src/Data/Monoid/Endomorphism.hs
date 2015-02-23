@@ -1,10 +1,10 @@
-{-# LANGUAGE StandaloneDeriving #-}
-{-# LANGUAGE FlexibleContexts #-}
+{-# LANGUAGE FlexibleContexts     #-}
+{-# LANGUAGE StandaloneDeriving   #-}
 {-# LANGUAGE UndecidableInstances #-}
 -----------------------------------------------------------------------------
 -- |
 -- Module      :  Data.Monoid.Endomorphism
--- Copyright   :  (c) 2013 diagrams-core team (see LICENSE)
+-- Copyright   :  (c) 2013-2015 diagrams-core team (see LICENSE)
 -- License     :  BSD-style (see LICENSE)
 -- Maintainer  :  diagrams-discuss@googlegroups.com
 --
@@ -30,7 +30,7 @@ import           Prelude           (Show)
 --   and the identity morphism as the identity element.
 newtype Endomorphism k a = Endomorphism {getEndomorphism :: k a a}
 
-deriving instance Show (k a a) =>  Show (Endomorphism k a)
+deriving instance Show (k a a) => Show (Endomorphism k a)
 
 instance Semigroupoid k => Semigroup (Endomorphism k a) where
   Endomorphism a <> Endomorphism b = Endomorphism (a `o` b)

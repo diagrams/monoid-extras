@@ -1,7 +1,11 @@
+{-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DeriveFoldable     #-}
+{-# LANGUAGE DeriveFunctor      #-}
+{-# LANGUAGE DeriveTraversable  #-}
 -----------------------------------------------------------------------------
 -- |
 -- Module      :  Data.Monoid.Recommend
--- Copyright   :  (c) 2012 diagrams-core team (see LICENSE)
+-- Copyright   :  (c) 2012-2015 diagrams-core team (see LICENSE)
 -- License     :  BSD-style (see LICENSE)
 -- Maintainer  :  diagrams-discuss@googlegroups.com
 --
@@ -14,10 +18,14 @@
 -----------------------------------------------------------------------------
 
 module Data.Monoid.Recommend
-       ( Recommend(..), getRecommend
+       ( Recommend(..)
+       , getRecommend
        ) where
 
+import Data.Data
+import Data.Foldable
 import Data.Semigroup
+import Data.Traversable
 
 -- | A value of type @Recommend a@ consists of a value of type @a@
 --   wrapped up in one of two constructors.  The @Recommend@
@@ -28,7 +36,7 @@ import Data.Semigroup
 --   overriding any @Recommend@ed values.
 data Recommend a = Recommend a
                  | Commit a
-                   deriving Show
+  deriving (Show, Read, Functor, Eq, Ord, Typeable, Data, Foldable, Traversable)
 
 -- | Extract the value of type @a@ wrapped in @Recommend a@.
 getRecommend :: Recommend a -> a

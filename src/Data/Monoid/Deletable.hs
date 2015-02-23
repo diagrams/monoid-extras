@@ -1,10 +1,12 @@
-{-# LANGUAGE DeriveFunctor
-  #-}
+{-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DeriveFoldable     #-}
+{-# LANGUAGE DeriveFunctor      #-}
+{-# LANGUAGE DeriveTraversable  #-}
 
 -----------------------------------------------------------------------------
 -- |
 -- Module      :  Data.Monoid.Deletable
--- Copyright   :  (c) 2011 diagrams-core team (see LICENSE)
+-- Copyright   :  (c) 2011-2015 diagrams-core team (see LICENSE)
 -- License     :  BSD-style (see LICENSE)
 -- Maintainer  :  diagrams-discuss@googlegroups.com
 --
@@ -22,6 +24,9 @@ module Data.Monoid.Deletable
 
        ) where
 
+import Data.Data
+import Data.Foldable
+import Data.Traversable
 import Data.Semigroup
 
 -- | If @m@ is a 'Monoid', then @Deletable m@ (intuitively speaking)
@@ -52,7 +57,7 @@ import Data.Semigroup
 --   * The remaining case is symmetric with the second.
 
 data Deletable m = Deletable Int m Int
-  deriving (Functor, Show)
+  deriving (Data, Typeable, Show, Read, Functor, Foldable, Traversable)
 
 -- | Project the wrapped value out of a `Deletable` value.
 unDelete :: Deletable m -> m

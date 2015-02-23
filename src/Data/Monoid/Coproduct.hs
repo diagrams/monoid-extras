@@ -1,12 +1,12 @@
-{-# LANGUAGE TypeOperators
-           , FlexibleInstances
-           , MultiParamTypeClasses
-  #-}
+{-# LANGUAGE DeriveDataTypeable    #-}
+{-# LANGUAGE FlexibleInstances     #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE TypeOperators         #-}
 
 -----------------------------------------------------------------------------
 -- |
 -- Module      :  Data.Monoid.Coproduct
--- Copyright   :  (c) 2011 diagrams-core team (see LICENSE)
+-- Copyright   :  (c) 2011-2015 diagrams-core team (see LICENSE)
 -- License     :  BSD-style (see LICENSE)
 -- Maintainer  :  diagrams-discuss@googlegroups.com
 --
@@ -23,8 +23,9 @@ module Data.Monoid.Coproduct
 
        ) where
 
-import Data.Either (lefts, rights)
+import Data.Either        (lefts, rights)
 import Data.Semigroup
+import Data.Typeable
 
 import Data.Monoid.Action
 
@@ -34,7 +35,7 @@ import Data.Monoid.Action
 --   concatenation, with appropriate combining of adjacent elements
 --   when possible.
 newtype m :+: n = MCo { unMCo :: [Either m n] }
-                  deriving Show
+  deriving (Typeable, Show)
 
 -- For efficiency and simplicity, we implement it just as [Either m
 -- n]: of course, this does not preserve the invariant of strictly

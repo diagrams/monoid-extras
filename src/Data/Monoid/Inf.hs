@@ -1,12 +1,13 @@
-{-# LANGUAGE DeriveFoldable    #-}
-{-# LANGUAGE DeriveFunctor     #-}
-{-# LANGUAGE DeriveTraversable #-}
-{-# LANGUAGE EmptyDataDecls    #-}
-{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DeriveFoldable     #-}
+{-# LANGUAGE DeriveFunctor      #-}
+{-# LANGUAGE DeriveTraversable  #-}
+{-# LANGUAGE EmptyDataDecls     #-}
+{-# LANGUAGE FlexibleInstances  #-}
 -----------------------------------------------------------------------------
 -- |
 -- Module      :  Data.Monoid.Inf
--- Copyright   :  (c) 2012 diagrams-core team (see LICENSE)
+-- Copyright   :  (c) 2012-2015 diagrams-core team (see LICENSE)
 -- License     :  BSD-style (see LICENSE)
 -- Maintainer  :  diagrams-discuss@googlegroups.com
 --
@@ -28,6 +29,7 @@ module Data.Monoid.Inf
        , posFinite, negFinite
        ) where
 
+import           Data.Data
 import           Data.Semigroup
 import           Prelude          hiding (maximum, minimum)
 import qualified Prelude          as P
@@ -39,7 +41,8 @@ data Pos
 data Neg
 
 data Inf p a = Infinity | Finite a
-  deriving (Eq, Show, Read, Functor, Foldable, Traversable)
+  deriving (Data, Typeable, Show, Read, Eq, Functor, Foldable,
+            Traversable)
 
 type PosInf a = Inf Pos a
 type NegInf a = Inf Neg a
