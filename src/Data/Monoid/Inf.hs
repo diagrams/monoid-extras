@@ -4,6 +4,8 @@
 {-# LANGUAGE DeriveTraversable  #-}
 {-# LANGUAGE EmptyDataDecls     #-}
 {-# LANGUAGE FlexibleInstances  #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports       #-}
+
 -----------------------------------------------------------------------------
 -- |
 -- Module      :  Data.Monoid.Inf
