@@ -1,12 +1,15 @@
+{-# LANGUAGE CPP                        #-}
 {-# LANGUAGE FlexibleContexts           #-}
 {-# LANGUAGE FlexibleInstances          #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE MultiParamTypeClasses      #-}
-{-# LANGUAGE OverlappingInstances       #-}
 {-# LANGUAGE TypeFamilies               #-}
 {-# LANGUAGE TypeOperators              #-}
 {-# LANGUAGE TypeSynonymInstances       #-}
 {-# LANGUAGE UndecidableInstances       #-}
+#if __GLASGOW_HASKELL__ < 710
+{-# LANGUAGE OverlappingInstances       #-}
+#endif
 
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
@@ -91,7 +94,11 @@ class l :>: a where
   -- | Alter the value of type @a@ by applying the given function to it.
   alt  :: (Option a -> Option a) -> l -> l
 
+#if __GLASGOW_HASKELL__ >= 710
+instance {-# OVERLAPPING #-} MList t => (:>:) (a ::: t) a where
+#else
 instance MList t => (:>:) (a ::: t) a where
+#endif
   inj a = (Option (Just a), empty)
   get   = fst
   alt   = first
