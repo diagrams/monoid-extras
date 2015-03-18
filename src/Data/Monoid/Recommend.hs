@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP                #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveFoldable     #-}
 {-# LANGUAGE DeriveFunctor      #-}
@@ -22,10 +23,13 @@ module Data.Monoid.Recommend
        , getRecommend
        ) where
 
-import Data.Data
-import Data.Foldable
-import Data.Semigroup
-import Data.Traversable
+#if __GLASGOW_HASKELL__ < 710
+import           Data.Foldable
+import           Data.Traversable
+#endif
+
+import           Data.Data
+import           Data.Semigroup
 
 -- | A value of type @Recommend a@ consists of a value of type @a@
 --   wrapped up in one of two constructors.  The @Recommend@
