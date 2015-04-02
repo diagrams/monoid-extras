@@ -1,4 +1,9 @@
-* 0.3.3.5 03 Dec 2014
+* 0.4: 
+
+  - add derived instances where possible:
+    Typeable, Data, Read, Eq, Ord, Functor, Foldable, Traversable
+
+* 0.3.3.5: 03 Dec 2014
 
   - allow semigroups-0.15
 
