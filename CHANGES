@@ -1,7 +1,8 @@
-* 0.4: 
+* 0.4:
 
   - add derived instances where possible:
     Typeable, Data, Read, Eq, Ord, Functor, Foldable, Traversable
+  - allow base-4.8
 
 * 0.3.3.5: 03 Dec 2014
 
