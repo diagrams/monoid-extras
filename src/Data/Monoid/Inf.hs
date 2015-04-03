@@ -13,7 +13,7 @@
 -- License     :  BSD-style (see LICENSE)
 -- Maintainer  :  diagrams-discuss@googlegroups.com
 --
--- Make semigroup under 'min' or 'max' into monoids by adjoining an
+-- Make semigroups under 'min' or 'max' into monoids by adjoining an
 -- element corresponding to infinity (positive or negative,
 -- respectively). These types are similar to @Option (Min a)@ and
 -- @Option (Max a)@ respectively, except that the 'Ord' instance
