@@ -11,3 +11,5 @@ dist_*
 history
 TAGS
 .hsenv
+.cabal-sandbox
+cabal.sandbox.config
