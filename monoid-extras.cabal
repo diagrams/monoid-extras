@@ -26,6 +26,7 @@ library
                      Data.Monoid.SemiDirectProduct,
                      Data.Monoid.SemiDirectProduct.Strict
                      Data.Monoid.Coproduct,
+                     Data.Monoid.Coproduct.Strict,
                      Data.Monoid.Cut,
                      Data.Monoid.Deletable,
                      Data.Monoid.Endomorphism,
