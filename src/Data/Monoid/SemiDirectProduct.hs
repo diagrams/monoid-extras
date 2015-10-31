@@ -1,12 +1,16 @@
 {-# LANGUAGE FlexibleInstances     #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE TupleSections         #-}
+{-# LANGUAGE CPP                   #-}
 
 module Data.Monoid.SemiDirectProduct
        ( Semi, quotient, inject, embed
        ) where
 
+#if !MIN_VERSION_base(4,8,0)
 import Data.Monoid
+#endif
+
 import Data.Monoid.Action
 
 -- | The semi-direct product of monoids @s@ and @m@. When the monoid
