@@ -81,3 +81,9 @@ instance Action m s => Action (Option m) s where
 instance Action (Endo a) a where
   act = appEndo
 
+-- | Action of a monoid @m@ on a set @s@ can be lifted to the
+-- functional space s -> a.  Recall that the type s -> a is a monoid
+-- for any monoid a. The lifted action is indeed a valid monoid action
+-- for a fixed a irrespective of whether s is a monoid or not.
+instance Action m s => Action m (s -> a) where
+  act m f s =  f $ m `act` s
