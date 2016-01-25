@@ -32,7 +32,7 @@ instance (Monoid m, Monoid s, Action m s) => Monoid (Semi s m) where
 
 -- | The quotient map.
 quotient :: Semi s m -> m
-quotient (Semi s m) = m
+quotient (Semi _ m) = m
 
 -- | The injection map.
 inject :: Monoid m => s -> Semi s m
