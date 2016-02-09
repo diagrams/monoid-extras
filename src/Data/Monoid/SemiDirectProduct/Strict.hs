@@ -28,8 +28,12 @@ data Semi s m = Semi s !m
 
 instance (Monoid m, Monoid s, Action m s) => Monoid (Semi s m) where
   mempty                            = Semi mempty mempty
+  {-# INLINE mempty #-}
   mappend (Semi xs xm) (Semi ys ym) = Semi (xs `mappend` (xm `act` ys)) (xm `mappend` ym)
-
+  {-# INLINE mappend #-}
+  mconcat                           = foldr mappend mempty
+  {-# INLINE mconcat #-}
+  
 -- | The quotient map.
 quotient :: Semi s m -> m
 quotient (Semi _ m) = m
