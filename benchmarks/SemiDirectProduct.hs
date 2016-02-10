@@ -4,7 +4,6 @@
 
 module Main where
 
-import           Control.Monad
 import           Criterion.Main
 
 #if !MIN_VERSION_base(4,8,0)
