@@ -24,10 +24,15 @@ newtype Semi s m = Semi { unSemi :: (s,m) }
 
 instance (Monoid m, Monoid s, Action m s) => Monoid (Semi s m) where
   mempty      = Semi (mempty, mempty)
+  {-# INLINE mempty #-}
+
   mappend x y = Semi (xs `mappend` (xm `act` ys), xm `mappend` ym)
     where (xs, xm) = unSemi x
           (ys, ym) = unSemi y
 
+  {-# INLINE mappend #-}
+  mconcat     = foldr mappend mempty
+  {-# INLINE mconcat #-}
 
 -- | The quotient map.
 quotient :: Semi s m -> m
