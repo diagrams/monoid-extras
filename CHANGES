@@ -1,3 +1,7 @@
+* 0.4.0.4: 14 February 2016
+
+- allow base-4.9 for GHC-8
+
 * 0.4.0.3: 10 November 2015
 
 - allow semigroups-0.18
