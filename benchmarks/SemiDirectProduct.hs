@@ -8,10 +8,12 @@ module Main where
 import           Criterion.Main
 
 #if !MIN_VERSION_base(4,8,0)
-import Data.Monoid
+import           Data.Monoid
+#else
+import           Data.Monoid (Sum)
 #endif
 
-import Data.Word
+import           Data.Word
 
 import           Data.Monoid.Action
 import qualified Data.Monoid.SemiDirectProduct        as L
@@ -19,7 +21,7 @@ import qualified Data.Monoid.SemiDirectProduct.Strict as S
 
 newtype MyMonoid = MyMonoid (Sum Word) deriving Monoid
 
-instance Action (MyMonoid) () where
+instance Action MyMonoid () where
   act _ = id
   {-# NOINLINE act #-}
 
