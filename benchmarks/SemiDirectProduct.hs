@@ -10,7 +10,7 @@ import           Criterion.Main
 #if !MIN_VERSION_base(4,8,0)
 import           Data.Monoid
 #else
-import           Data.Monoid (Sum)
+import           Data.Monoid (Sum(..))
 #endif
 
 import           Data.Word
