@@ -9,11 +9,10 @@ import           Criterion.Main
 
 #if !MIN_VERSION_base(4,8,0)
 import           Data.Monoid
+import           Data.Word
 #else
 import           Data.Monoid (Sum(..))
 #endif
-
-import           Data.Word
 
 import           Data.Monoid.Action
 import qualified Data.Monoid.SemiDirectProduct        as L
