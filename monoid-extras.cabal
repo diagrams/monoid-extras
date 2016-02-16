@@ -51,6 +51,6 @@ benchmark semi-direct-product
   hs-source-dirs: benchmarks
   main-is: SemiDirectProduct.hs
   type: exitcode-stdio-1.0
-  build-depends: base
+  build-depends: base          >= 4.3 &&  < 4.10
                , criterion
                , monoid-extras == 0.4.0.2
