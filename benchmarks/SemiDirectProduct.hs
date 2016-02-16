@@ -1,6 +1,7 @@
-{-# LANGUAGE CPP                   #-}
-{-# LANGUAGE FlexibleInstances     #-}
-{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE CPP                        #-}
+{-# LANGUAGE FlexibleInstances          #-}
+{-# LANGUAGE MultiParamTypeClasses      #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 
 module Main where
 
@@ -16,7 +17,9 @@ import           Data.Monoid.Action
 import qualified Data.Monoid.SemiDirectProduct        as L
 import qualified Data.Monoid.SemiDirectProduct.Strict as S
 
-instance Action (Sum Word) () where
+newtype MyMonoid = MyMonoid (Sum Word) deriving Monoid
+
+instance Action (MyMonoid) () where
   act _ = id
   {-# NOINLINE act #-}
 
@@ -27,7 +30,7 @@ main = defaultMain
        , bench "strict/quotient"  $ whnf (S.quotient . mconcat) strict
        , bench "lazy/quotient"    $ whnf (L.quotient . mconcat) lazy
        ]
-  where strict :: [S.Semi () (Sum Word)]
-        strict =  map (S.embed . Sum) $ take 1000 [1..]
-        lazy   :: [L.Semi () (Sum Word)]
-        lazy   =  map (L.embed . Sum) $ take 1000 [1..]
+  where strict :: [S.Semi () MyMonoid]
+        strict =  map (S.embed . MyMonoid . Sum) $ take 1000 [1..]
+        lazy   :: [L.Semi () (MyMonoid)]
+        lazy   =  map (L.embed . MyMonoid . Sum) $ take 1000 [1..]
