@@ -53,4 +53,4 @@ benchmark semi-direct-product
   type: exitcode-stdio-1.0
   build-depends: base          >= 4.3 &&  < 4.10
                , criterion
-               , monoid-extras == 0.4.0.2
+               , monoid-extras
