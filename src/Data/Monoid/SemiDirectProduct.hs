@@ -4,7 +4,7 @@
 {-# LANGUAGE TupleSections         #-}
 
 module Data.Monoid.SemiDirectProduct
-       ( Semi, unSemi, tag, inject, forget, embed, quotient
+       ( Semi, unSemi, tag, inject, untag, embed, quotient
        ) where
 
 #if !MIN_VERSION_base(4,8,0)
@@ -51,9 +51,10 @@ tag s m = Semi (s,m)
 inject :: Monoid m => s -> Semi s m
 inject = Semi . (,mempty)
 
--- | Forget the monoidal tag.  Of course, @forget . inject = id@.
-forget :: Semi s m -> s
-forget = fst . unSemi
+-- | Forget the monoidal tag.  Of course, @untag . inject = id@, and
+--   @untag (tag s m) = s@.
+untag :: Semi s m -> s
+untag = fst . unSemi
 
 -- | Embed a "tag" value as a value of type @Semi s m@.  Note that
 --

@@ -8,7 +8,7 @@
 {-# LANGUAGE TupleSections         #-}
 
 module Data.Monoid.SemiDirectProduct.Strict
-       ( Semi, unSemi, tag, inject, forget, embed, quotient
+       ( Semi, unSemi, tag, inject, untag, embed, quotient
        ) where
 
 #if !MIN_VERSION_base(4,8,0)
@@ -50,9 +50,10 @@ tag = Semi
 inject :: Monoid m => s -> Semi s m
 inject = flip Semi mempty
 
--- | Forget the monoidal tag.  Of course, @forget . inject = id@.
-forget :: Semi s m -> s
-forget (Semi s _) = s
+-- | Forget the monoidal tag.  Of course, @untag . inject = id@, and
+--   @untag (tag s m) = s@.
+untag :: Semi s m -> s
+untag (Semi s _) = s
 
 -- | Embed a "tag" value as a value of type @Semi s m@.  Note that
 --
