@@ -1,3 +1,7 @@
+* 0.4.2: 16 July 2016
+
+- Additions to Data.Monoid.SemiDirectProduct (unSemi, tag, untag)
+
 * 0.4.1.2: 16 June 2016
 
 - allow semigroupoids-5.1
