@@ -1,5 +1,6 @@
-{-# LANGUAGE FlexibleInstances     #-}
-{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE FlexibleInstances          #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE MultiParamTypeClasses      #-}
 
 -----------------------------------------------------------------------------
 -- |
@@ -16,7 +17,10 @@ module Data.Monoid.Action
        ( Action(..)
        ) where
 
+import           Control.Arrow
+import           Control.Category
 import           Data.Semigroup
+import           Prelude          hiding (id, (.))
 
 ------------------------------------------------------------
 --  Monoid and semigroup actions
@@ -81,3 +85,45 @@ instance Action m s => Action (Option m) s where
 instance Action (Endo a) a where
   act = appEndo
 
+------------------------------------------------------------
+
+-- TODO: better names for newtypes
+
+class Contrafunctor f where
+  comap :: (b -> a) -> f a -> f b
+
+-- lifting action over covariant functor
+newtype Covariant f a = X (f a)
+  deriving (Functor)
+
+instance (Functor f, Action m a) => Action m (Covariant f a) where
+  act = fmap . act
+
+-- probably don't need this?
+-- instance (Functor f, ActionF m g) => ActionF m (f :.: g)
+
+-- lifting action to the argument type
+newtype Contravariant f a = Y (f a)
+  deriving (Contrafunctor)
+
+instance (Action m a, Contrafunctor f) => Action (Dual m) (Contravariant f a) where
+  act = comap . act . getDual
+
+------------------------------------------------------------
+
+-- Does ActionF work for both covariant and contravariant functors?
+-- Yes!  m acts on any parameterized type.  It's like saying
+--  (forall a. Action m (f a)).
+--
+-- Of course the uniformity law changes depending on whether f is co-
+-- or contravariant (or there is no uniformity law if f is not
+-- functorial at all).
+class ActionF m f where
+  actF :: m -> f a -> f a
+  actF = const id
+
+-- newtype Z f arr b a = Z (arr (f a) b)
+
+-- instance Contra f => Functor (
+
+-- instance (ActionF m f) => ActionF (Dual m)
