@@ -46,7 +46,7 @@ instance (Monoid m, Monoid s, Action m s) => Monoid (Semi s m) where
 tag :: s -> m -> Semi s m
 tag = Semi
 
--- | The injection map, *i.e.* give an @s@ value a trivial tag.
+-- | The injection map, /i.e./ give an @s@ value a trivial tag.
 inject :: Monoid m => s -> Semi s m
 inject = flip Semi mempty
 
@@ -61,7 +61,7 @@ untag (Semi s _) = s
 --
 --   and
 --
---   @embed m <> inject s@ = tag (act m s) m@.
+--   @embed m <> inject s@ = tag (act m s) m@
 --
 --   The semi-direct product gives a split extension of @s@ by
 --   @m@. This allows us to embed @m@ into the semi-direct
@@ -70,6 +70,6 @@ untag (Semi s _) = s
 embed :: Monoid s => m -> Semi s m
 embed = Semi mempty
 
--- | The quotient map, *i.e.* retrieve the monoidal tag value.
+-- | The quotient map, /i.e./ retrieve the monoidal tag value.
 quotient :: Semi s m -> m
 quotient (Semi _ m) = m
