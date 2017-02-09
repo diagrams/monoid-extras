@@ -31,13 +31,14 @@ module Data.Monoid.Inf
        , posFinite, negFinite
        ) where
 
+import           Control.Applicative (liftA2)
 import           Data.Data
 import           Data.Semigroup
-import           Prelude          hiding (maximum, minimum)
-import qualified Prelude          as P
+import           Prelude             hiding (maximum, minimum)
+import qualified Prelude             as P
 
-import           Data.Foldable    (Foldable)
-import           Data.Traversable (Traversable)
+import           Data.Foldable       (Foldable)
+import           Data.Traversable    (Traversable)
 
 data Pos
 data Neg
@@ -93,7 +94,7 @@ instance Bounded a => Bounded (NegInf a) where
     minBound = Infinity
     maxBound = Finite maxBound
 
-instance Bounded a => Bounded (Max a) where
+instance Bounded a => Bounded (PosInf a) where
     minBound = Finite minBound
     maxBound = Infinity
 
