@@ -76,10 +76,6 @@ instance Ord a => Monoid (Inf Neg a) where
   mempty = Infinity
   mappend = (<>)
 
-instance Functor (Inf p) where
-    fmap f Infinity = Infinity
-    fmap f (Finite x) = Finite $ f x
-
 instance Applicative (Inf p) where
     pure = Finite
     Infinity <*> _ = Infinity
@@ -88,7 +84,7 @@ instance Applicative (Inf p) where
 
 instance Monad (Inf p) where
     Infinity >>= _ = Infinity
-    Finite x >>= f = Finite $ f x
+    Finite x >>= f = f x
 
 instance Bounded a => Bounded (NegInf a) where
     minBound = Infinity
