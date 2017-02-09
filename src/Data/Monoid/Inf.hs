@@ -75,6 +75,55 @@ instance Ord a => Monoid (Inf Neg a) where
   mempty = Infinity
   mappend = (<>)
 
+instance Functor (Inf p) where
+    fmap f Infinity = Infinity
+    fmap f (Finite x) = Finite $ f x
+
+instance Applicative (Inf p) where
+    pure = Finite
+    Infinity <*> _ = Infinity
+    _ <*> Infinity = Infinity
+    Finite f <*> Finite x = Finite $ f x
+
+instance Monad (Inf p) where
+    Infinity >>= _ = Infinity
+    Finite x >>= f = Finite $ f x
+
+instance Bounded a => Bounded (NegInf a) where
+    minBound = Infinity
+    maxBound = Finite maxBound
+
+instance Bounded a => Bounded (Max a) where
+    minBound = Finite minBound
+    maxBound = Infinity
+
+instance Num a => Num (Inf p a) where
+    (+) = liftA2 (+)
+    (*) = liftA2 (*)
+    abs = fmap abs
+    signum = fmap signum
+    fromInteger = Finite . fromInteger
+    negate = fmap negate
+
+instance Fractional a => Fractional (Inf p a) where
+    fromRational = Finite . fromRational
+    recip = fmap recip
+
+instance Floating a => Floating (Inf p a) where
+    pi = pure pi
+    exp = fmap exp
+    log = fmap log
+    sin = fmap sin
+    cos = fmap cos
+    asin = fmap asin
+    acos = fmap acos
+    atan = fmap atan
+    sinh = fmap sinh
+    cosh = fmap cosh
+    asinh = fmap asinh
+    acosh = fmap acosh
+    atanh = fmap atanh
+
 minimum :: Ord a => [a] -> PosInf a
 minimum xs = P.minimum (Infinity : map Finite xs)
 
