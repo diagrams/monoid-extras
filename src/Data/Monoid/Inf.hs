@@ -39,51 +39,83 @@ import qualified Prelude          as P
 import           Data.Foldable    (Foldable)
 import           Data.Traversable (Traversable)
 
+-- | Type index indicating positive infinity.
 data Pos
+-- | Type index indicating negative infinity.
 data Neg
 
+-- | @Inf p a@ represents the type 'a' extended with a new "infinite"
+--   value, which is treated as either positive or negative infinity
+--   depending on the type index 'p'.  This type exists mostly for its
+--   'Ord', 'Semigroup', and 'Monoid' instances.
 data Inf p a = Infinity | Finite a
   deriving (Data, Typeable, Show, Read, Eq, Functor, Foldable,
             Traversable)
 
+-- | The type 'a' extended with positive infinity.
 type PosInf a = Inf Pos a
+
+-- | The type 'a' extended with negative infinity.
 type NegInf a = Inf Neg a
 
+-- | Positive infinity is greater than any finite value.
 instance Ord a => Ord (Inf Pos a) where
   compare Infinity Infinity = EQ
   compare Infinity Finite{} = GT
   compare Finite{} Infinity = LT
   compare (Finite a) (Finite b) = compare a b
 
+-- | Negative infinity is less than any finite value.
 instance Ord a => Ord (Inf Neg a) where
   compare Infinity Infinity = EQ
   compare Infinity Finite{} = LT
   compare Finite{} Infinity = GT
   compare (Finite a) (Finite b) = compare a b
 
+-- | An ordered type extended with positive infinity is a semigroup
+--   under 'min'.
 instance Ord a => Semigroup (Inf Pos a) where
   (<>) = min
 
+-- | An ordered type extended with negative infinity is a semigroup
+--   under 'max'.
 instance Ord a => Semigroup (Inf Neg a) where
   (<>) = max
 
+-- | An ordered type extended with positive infinity is a monoid under
+--   'min', with positive infinity as the identity element.
 instance Ord a => Monoid (Inf Pos a) where
   mempty = Infinity
   mappend = (<>)
 
+-- | An ordered type extended with negative infinity is a monoid under
+--   'max', with negative infinity as the identity element.
 instance Ord a => Monoid (Inf Neg a) where
   mempty = Infinity
   mappend = (<>)
 
+-- | Find the minimum of a list of values.  Returns positive infinity
+--   iff the list is empty.
 minimum :: Ord a => [a] -> PosInf a
 minimum xs = P.minimum (Infinity : map Finite xs)
 
+-- | Find the maximum of a list of values.  Returns negative infinity
+--   iff the list is empty.
 maximum :: Ord a => [a] -> NegInf a
 maximum xs = P.maximum (Infinity : map Finite xs)
 
+-- | Positive infinity.
 posInfty :: PosInf a
+
+-- | Negative infinity.
 negInfty :: NegInf a
+
+-- | Embed a finite value into the space of such values extended with
+--   positive infinity.
 posFinite :: a -> PosInf a
+
+-- | Embed a finite value into the space of such values extended with
+--   negative infinity.
 negFinite :: a -> NegInf a
 
 posInfty = Infinity
