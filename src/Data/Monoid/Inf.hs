@@ -31,7 +31,7 @@ module Data.Monoid.Inf
        , posFinite, negFinite
        ) where
 
-import           Control.Applicative (liftA2)
+import           Control.Applicative (Applicative(..), liftA2)
 import           Data.Data
 import           Data.Semigroup
 import           Prelude             hiding (maximum, minimum)
