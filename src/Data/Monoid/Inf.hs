@@ -31,13 +31,14 @@ module Data.Monoid.Inf
        , posFinite, negFinite
        ) where
 
+import           Control.Applicative (Applicative(..), liftA2)
 import           Data.Data
 import           Data.Semigroup
-import           Prelude          hiding (maximum, minimum)
-import qualified Prelude          as P
+import           Prelude             hiding (maximum, minimum)
+import qualified Prelude             as P
 
-import           Data.Foldable    (Foldable)
-import           Data.Traversable (Traversable)
+import           Data.Foldable       (Foldable)
+import           Data.Traversable    (Traversable)
 
 -- | Type index indicating positive infinity.
 data Pos
@@ -93,6 +94,24 @@ instance Ord a => Monoid (Inf Pos a) where
 instance Ord a => Monoid (Inf Neg a) where
   mempty = Infinity
   mappend = (<>)
+
+instance Applicative (Inf p) where
+    pure = Finite
+    Infinity <*> _ = Infinity
+    _ <*> Infinity = Infinity
+    Finite f <*> Finite x = Finite $ f x
+
+instance Monad (Inf p) where
+    Infinity >>= _ = Infinity
+    Finite x >>= f = f x
+
+instance Bounded a => Bounded (NegInf a) where
+    minBound = Infinity
+    maxBound = Finite maxBound
+
+instance Bounded a => Bounded (PosInf a) where
+    minBound = Finite minBound
+    maxBound = Infinity
 
 -- | Find the minimum of a list of values.  Returns positive infinity
 --   iff the list is empty.
