@@ -104,6 +104,7 @@ instance Applicative (Inf p) where
 instance Monad (Inf p) where
     Infinity >>= _ = Infinity
     Finite x >>= f = f x
+    return = pure
 
 instance Bounded a => Bounded (NegInf a) where
     minBound = Infinity
