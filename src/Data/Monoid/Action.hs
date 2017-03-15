@@ -81,3 +81,6 @@ instance Action m s => Action (Option m) s where
 instance Action (Endo a) a where
   act = appEndo
 
+-- | Use @fmap@ to apply @act@.
+instance (Functor f, Action m a) => Action m (f a) where
+  act m = fmap (act m)
