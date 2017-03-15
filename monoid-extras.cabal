@@ -31,6 +31,7 @@ library
                      Data.Monoid.Endomorphism,
                      Data.Monoid.Inf,
                      Data.Monoid.MList,
+                     Data.Monoid.Priority,
                      Data.Monoid.Recommend,
                      Data.Monoid.Split,
                      Data.Monoid.WithSemigroup
