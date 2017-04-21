@@ -2,6 +2,8 @@
 
 - Additions to Data.Monoid.SemiDirectProduct (unSemi, tag, untag)
 
+- Hackage revision 1: allow semigroupoids-5.2
+
 * 0.4.1.2: 16 June 2016
 
 - allow semigroupoids-5.1
