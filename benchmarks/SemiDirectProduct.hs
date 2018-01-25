@@ -13,12 +13,15 @@ import           Data.Word
 #else
 import           Data.Monoid (Sum(..))
 #endif
+#if !MIN_VERSION_base(4,11,0)
+import           Data.Semigroup (Semigroup)
+#endif
 
 import           Data.Monoid.Action
 import qualified Data.Monoid.SemiDirectProduct        as L
 import qualified Data.Monoid.SemiDirectProduct.Strict as S
 
-newtype MyMonoid = MyMonoid (Sum Word) deriving Monoid
+newtype MyMonoid = MyMonoid (Sum Word) deriving (Semigroup, Monoid)
 
 instance Action MyMonoid () where
   act _ = id

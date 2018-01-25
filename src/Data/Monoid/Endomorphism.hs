@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP                  #-}
 {-# LANGUAGE FlexibleContexts     #-}
 {-# LANGUAGE StandaloneDeriving   #-}
 {-# LANGUAGE UndecidableInstances #-}
@@ -20,7 +21,8 @@ module Data.Monoid.Endomorphism
 import           Control.Category
 import           Data.Group
 import           Data.Groupoid
-import           Data.Semigroup
+import           Data.Monoid       (Monoid(..))
+import           Data.Semigroup    (Semigroup(..))
 import           Data.Semigroupoid
 import           Prelude           (Show)
 
@@ -35,9 +37,11 @@ deriving instance Show (k a a) => Show (Endomorphism k a)
 instance Semigroupoid k => Semigroup (Endomorphism k a) where
   Endomorphism a <> Endomorphism b = Endomorphism (a `o` b)
 
-instance Category k => Monoid (Endomorphism k a) where
+instance (Semigroupoid k, Category k) => Monoid (Endomorphism k a) where
   mempty = Endomorphism id
+#if !MIN_VERSION_base(4,11,0)
   Endomorphism a `mappend` Endomorphism b = Endomorphism (a . b)
+#endif
 
 instance (Category k, Groupoid k) => Group (Endomorphism k a) where
   invert (Endomorphism a) = Endomorphism (inv a)
