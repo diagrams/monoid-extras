@@ -12,8 +12,9 @@ module Data.Monoid.SemiDirectProduct.Strict
        ) where
 
 #if !MIN_VERSION_base(4,8,0)
-import           Data.Monoid
+import           Data.Monoid        (Monoid(..))
 #endif
+import           Data.Semigroup     (Semigroup(..))
 
 import           Data.Monoid.Action
 
@@ -33,11 +34,19 @@ data Semi s m = Semi s !m
 unSemi :: Semi s m -> (s,m)
 unSemi (Semi s m) = (s,m)
 
+instance (Semigroup m, Semigroup s, Action m s) => Semigroup (Semi s m) where
+  Semi xs xm <> Semi ys ym          = Semi (xs <> (xm `act` ys)) (xm <> ym)
+  {-# INLINE (<>) #-}
+  sconcat                           = foldr1 (<>)
+  {-# INLINE sconcat #-}
+
 instance (Monoid m, Monoid s, Action m s) => Monoid (Semi s m) where
   mempty                            = Semi mempty mempty
   {-# INLINE mempty #-}
+#if !MIN_VERSION_base(4,11,0)
   mappend (Semi xs xm) (Semi ys ym) = Semi (xs `mappend` (xm `act` ys)) (xm `mappend` ym)
   {-# INLINE mappend #-}
+#endif
   mconcat                           = foldr mappend mempty
   {-# INLINE mconcat #-}
 
