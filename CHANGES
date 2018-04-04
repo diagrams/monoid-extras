@@ -1,8 +1,15 @@
+* 0.4.3: 3 April 2018
+
+- Allow base-4.11
+- Fix compilation on GHC 8.4
+- Add more instances for Inf
+
 * 0.4.2: 16 July 2016
 
 - Additions to Data.Monoid.SemiDirectProduct (unSemi, tag, untag)
 
 - Hackage revision 1: allow semigroupoids-5.2
+- Hackage revision 2: allow base-4.10
 
 * 0.4.1.2: 16 June 2016
 
