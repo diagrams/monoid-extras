@@ -36,8 +36,10 @@ instance (Semigroup m, Semigroup s, Action m s) => Semigroup (Semi s m) where
           (ys, ym) = unSemi y
   {-# INLINE (<>) #-}
 
+#if MIN_VERSION_base(4,8,0)
   sconcat = foldr1 (<>)
   {-# INLINE sconcat #-}
+#endif
 
 instance (Monoid m, Monoid s, Action m s) => Monoid (Semi s m) where
   mempty      = Semi (mempty, mempty)

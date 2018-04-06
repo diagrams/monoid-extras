@@ -4,6 +4,7 @@
 {-# LANGUAGE DeriveTraversable  #-}
 {-# LANGUAGE EmptyDataDecls     #-}
 {-# LANGUAGE FlexibleInstances  #-}
+{-# LANGUAGE TypeSynonymInstances #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports       #-}
 
 -----------------------------------------------------------------------------
