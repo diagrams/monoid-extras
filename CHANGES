@@ -1,3 +1,7 @@
+* 0.4.4: 8 April 2018
+
+- Fix build on older (< 7.10) GHCs (thanks to George Wilson for the fix)
+
 * 0.4.3: 3 April 2018
 
 - Allow base-4.11
