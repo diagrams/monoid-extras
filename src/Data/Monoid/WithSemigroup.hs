@@ -1,7 +1,7 @@
-{-# LANGUAGE FlexibleInstances
-           , UndecidableInstances
-  #-}
+{-# LANGUAGE FlexibleInstances    #-}
+{-# LANGUAGE UndecidableInstances #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
 -----------------------------------------------------------------------------
 -- |
 -- Module      :  Data.Monoid.WithSemigroup
@@ -17,7 +17,7 @@ module Data.Monoid.WithSemigroup
        ( Monoid'
        ) where
 
-import Data.Semigroup
+import           Data.Semigroup
 
 -- Poor man's constraint synonym.  Eventually, once it becomes
 -- standard, we can make this a real constraint synonym and get rid of
