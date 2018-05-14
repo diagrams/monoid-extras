@@ -1,3 +1,20 @@
+* 0.5: 14 May 2018
+
+- Modernize Data.Monoid.WithSemigroup
+
+  It used to export a type class Monoid' with no methods and a single
+  instance, for use as a "poor man's constraint synonym" for the
+  combination of Monoid and Semigroup.  Now Monoid':
+
+    - Is a real constraint synonym, using ConstraintKinds.
+    - Is simply a synonym for Monoid under base-4.11 and later, in
+      which case Semigroup is already a superclass of Monoid.
+
+  This technically necessitates a major version bump but should not
+  cause any issues for packages that depend on monoid-extras, other
+  than potentially requiring the addition of a ConstraintKinds pragma
+  under GHC 7.8.
+
 * 0.4.4: 8 April 2018
 
 - Fix build on older (< 7.10) GHCs (thanks to George Wilson for the fix)
