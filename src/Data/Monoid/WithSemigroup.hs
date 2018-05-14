@@ -1,3 +1,5 @@
+{-# LANGUAGE ConstraintKinds      #-}
+{-# LANGUAGE CPP                  #-}
 {-# LANGUAGE FlexibleInstances    #-}
 {-# LANGUAGE UndecidableInstances #-}
 
@@ -19,14 +21,13 @@ module Data.Monoid.WithSemigroup
 
 import           Data.Semigroup
 
--- Poor man's constraint synonym.  Eventually, once it becomes
--- standard, we can make this a real constraint synonym and get rid of
--- the UndecidableInstances flag.  Better yet, hopefully the Monoid
--- class will eventually have a Semigroup superclass.
-
--- | The @Monoid'@ class is a synonym for things which are instances
---   of both 'Semigroup' and 'Monoid'.  Ideally, the 'Monoid' class
---   itself will eventually include a 'Semigroup' superclass and we
---   can get rid of this.
-class (Semigroup m, Monoid m) => Monoid' m
-instance (Semigroup m, Monoid m) => Monoid' m
+-- | For base < 4.11, the @Monoid'@ constraint is a synonym for things
+--   which are instances of both 'Semigroup' and 'Monoid'.  For base
+--   version 4.11 and onwards, @Monoid@ has @Semigroup@ as a
+--   superclass already, so for backwards compatibility @Monoid'@ is
+--   provided as a synonym for @Monoid@.
+#if MIN_VERSION_base(4,11,0)
+type Monoid' = Monoid
+#else
+type Monoid' m = (Semigroup m, Monoid m)
+#endif
