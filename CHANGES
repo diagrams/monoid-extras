@@ -1,3 +1,8 @@
+* 0.5.0.1: 21 Jan 2019
+
+- Add Data.Monoid.Coproduct.Strict for a more efficient coproduct in
+  some use cases.
+
 * 0.5: 14 May 2018
 
 - Modernize Data.Monoid.WithSemigroup
