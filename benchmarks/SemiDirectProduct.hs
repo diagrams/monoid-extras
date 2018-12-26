@@ -17,15 +17,15 @@ import           Data.Monoid (Sum(..))
 import           Data.Semigroup (Semigroup)
 #endif
 
-import           Data.Monoid.Action
+import           Data.Monoid.Action.LeftAction
 import qualified Data.Monoid.SemiDirectProduct        as L
 import qualified Data.Monoid.SemiDirectProduct.Strict as S
 
 newtype MyMonoid = MyMonoid (Sum Word) deriving (Semigroup, Monoid)
 
-instance Action MyMonoid () where
-  act _ = id
-  {-# NOINLINE act #-}
+instance LeftAction MyMonoid () where
+  leftAct _ = id
+  {-# NOINLINE leftAct #-}
 
 main :: IO ()
 main = defaultMain

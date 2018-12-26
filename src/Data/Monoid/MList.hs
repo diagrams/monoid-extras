@@ -43,7 +43,7 @@ module Data.Monoid.MList
        ) where
 
 import           Control.Arrow
-import           Data.Monoid.Action
+import           Data.Monoid.Action.LeftAction
 import           Data.Semigroup
 
 -- $mlist
@@ -108,7 +108,7 @@ instance (t :>: a) => (:>:) (b ::: t) a where
   get   = get . snd
   alt   = second . alt
 
--- Monoid actions -----------------------------------------
+-- Monoid left actions -----------------------------------------
 
 -- $mlist-actions
 -- Monoidal heterogeneous lists may act on one another as you would
@@ -118,17 +118,17 @@ instance (t :>: a) => (:>:) (b ::: t) a where
 
 -- | @SM@, an abbreviation for \"single monoid\" (as opposed to a
 --   heterogeneous list of monoids), is only used internally to help
---   guide instance selection when defining the action of
+--   guide instance selection when defining the left action of
 --   heterogeneous monoidal lists on each other.
 newtype SM m = SM m
                deriving Show
 
-instance (Action (SM a) l2, Action l1 l2) => Action (a, l1) l2 where
-  act (a,l) = act (SM a) . act l
+instance (LeftAction (SM a) l2, LeftAction l1 l2) => LeftAction (a, l1) l2 where
+  leftAct (a,l) = leftAct (SM a) . leftAct l
 
-instance Action (SM a) () where
-  act _ _ = ()
+instance LeftAction (SM a) () where
+  leftAct _ _ = ()
 
-instance (Action a a', Action (SM a) l) => Action (SM a) (Option a', l) where
-  act (SM a) (Option Nothing,   l) = (Option Nothing, act (SM a) l)
-  act (SM a) (Option (Just a'), l) = (Option (Just (act a a')), act (SM a) l)
+instance (LeftAction a a', LeftAction (SM a) l) => LeftAction (SM a) (Option a', l) where
+  leftAct (SM a) (Option Nothing,   l) = (Option Nothing, leftAct (SM a) l)
+  leftAct (SM a) (Option (Just a'), l) = (Option (Just (leftAct a a')), leftAct (SM a) l)

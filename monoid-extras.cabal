@@ -23,6 +23,7 @@ source-repository head
 library
   default-language:  Haskell2010
   exposed-modules:   Data.Monoid.Action,
+                     Data.Monoid.Action.LeftAction,
                      Data.Monoid.SemiDirectProduct,
                      Data.Monoid.SemiDirectProduct.Strict
                      Data.Monoid.Coproduct,

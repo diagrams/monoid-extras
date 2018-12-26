@@ -27,7 +27,7 @@ import Data.Either        (lefts, rights)
 import Data.Semigroup
 import Data.Typeable
 
-import Data.Monoid.Action
+import Data.Monoid.Action.LeftAction
 
 -- | @m :+: n@ is the coproduct of monoids @m@ and @n@.  Values of
 --   type @m :+: n@ consist of alternating lists of @m@ and @n@
@@ -87,7 +87,7 @@ killR = mconcat . lefts . unMCo
 killL :: Monoid n => m :+: n -> n
 killL = mconcat . rights . unMCo
 
--- | Take a value from a coproduct monoid where the left monoid has an
+-- | Take a value from a coproduct monoid where the left monoid has a left
 --   action on the right, and \"untangle\" it into a pair of values.  In
 --   particular,
 --
@@ -95,17 +95,17 @@ killL = mconcat . rights . unMCo
 --
 --   is sent to
 --
--- > (m1 <> m2 <> m3 <> ..., (act m1 n1) <> (act (m1 <> m2) n2) <> (act (m1 <> m2 <> m3) n3) <> ...)
+-- > (m1 <> m2 <> m3 <> ..., (leftAct m1 n1) <> (leftAct (m1 <> m2) n2) <> (leftAct (m1 <> m2 <> m3) n3) <> ...)
 --
 --   That is, before combining @n@ values, every @n@ value is acted on
 --   by all the @m@ values to its left.
-untangle :: (Action m n, Monoid m, Monoid n) => m :+: n -> (m,n)
+untangle :: (LeftAction m n, Monoid m, Monoid n) => m :+: n -> (m,n)
 untangle (MCo elts) = untangle' mempty elts
   where untangle' cur [] = cur
         untangle' (curM, curN) (Left m : elts')  = untangle' (curM `mappend` m, curN) elts'
-        untangle' (curM, curN) (Right n : elts') = untangle' (curM, curN `mappend` act curM n) elts'
+        untangle' (curM, curN) (Right n : elts') = untangle' (curM, curN `mappend` leftAct curM n) elts'
 
--- | Coproducts act on other things by having each of the components
---   act individually.
-instance (Action m r, Action n r) => Action (m :+: n) r where
-  act = appEndo . mconcat . map (Endo . either act act) . unMCo
+-- | Coproducts left actions on other things by having each of the components
+--   left actions individually.
+instance (LeftAction m r, LeftAction n r) => LeftAction (m :+: n) r where
+  leftAct = appEndo . mconcat . map (Endo . either leftAct leftAct) . unMCo
