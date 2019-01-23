@@ -32,10 +32,10 @@ module Data.Monoid.Coproduct.Strict
 
   ) where
 
-import           Control.Applicative
 import           Data.Monoid.Action
 import           Data.Monoid.WithSemigroup
 import           Data.Semigroup
+import           Prelude
 
 -- Internal strict version of 'Data.Semigroup.Option'
 data Possible a = Only !a | Nought
