@@ -15,5 +15,6 @@ cabal.project.local
 .cabal-sandbox/
 cabal.sandbox.config
 .stack-work/
+stack.yaml.lock
 codex.tags
 .ghc.environment.*
