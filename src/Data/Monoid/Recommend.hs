@@ -14,7 +14,7 @@
 --
 -- A type for representing values with an additional bit saying
 -- whether the value is \"just a recommendation\" (to be used only if
--- nothing better comes along) or a \"committment\" (to certainly be
+-- nothing better comes along) or a \"commitment\" (to certainly be
 -- used, overriding merely recommended values), along with
 -- corresponding @Semigroup@ and @Monoid@ instances.
 --
