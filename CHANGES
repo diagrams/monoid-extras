@@ -1,7 +1,9 @@
-* 0.5.0.1: 21 Jan 2019
+* 0.5.1: 19 Oct 2019
 
-- Add Data.Monoid.Coproduct.Strict for a more efficient coproduct in
+- New module Data.Monoid.Coproduct.Strict for a more efficient coproduct in
   some use cases.
+- Update for GHC 8.8.
+- Drop support for GHC 7.8.
 
 * 0.5: 14 May 2018
 
