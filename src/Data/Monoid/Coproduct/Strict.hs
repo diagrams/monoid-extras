@@ -1,9 +1,13 @@
 {-# LANGUAGE BangPatterns          #-}
+{-# LANGUAGE ConstraintKinds       #-}
 {-# LANGUAGE FlexibleInstances     #-}
 {-# LANGUAGE MonoLocalBinds        #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE RankNTypes            #-}
 {-# LANGUAGE TypeOperators         #-}
+
+-- For GHC-7.4
+{-# LANGUAGE UndecidableInstances  #-}
 
 -----------------------------------------------------------------------------
 -- |
