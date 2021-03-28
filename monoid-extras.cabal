@@ -36,10 +36,10 @@ library
                      Data.Monoid.Split,
                      Data.Monoid.WithSemigroup
 
-  build-depends:     base >= 4.5 && < 4.16,
+  build-depends:     base >= 4.5,
                      groups < 0.6,
-                     semigroups >= 0.8 && < 0.20,
-                     semigroupoids >= 4.0 && < 5.4
+                     semigroups >= 0.8,
+                     semigroupoids >= 4.0
 
   hs-source-dirs:    src
 
@@ -56,7 +56,7 @@ benchmark semi-direct-product
   hs-source-dirs: benchmarks
   main-is: SemiDirectProduct.hs
   type: exitcode-stdio-1.0
-  build-depends: base          >= 4.3 &&  < 4.16
+  build-depends: base          >= 4.3
                , semigroups
                , criterion
                , monoid-extras
