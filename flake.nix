@@ -6,7 +6,7 @@
   outputs = { self, nixpkgs, flake-utils, ... }:
     with flake-utils.lib;
     with nixpkgs.lib;
-    eachSystem [ "x86_64-darwin" "x86_64-linux" ] (system:
+    eachSystem [ "x86_64-linux" ] (system:
       let version = "${substring 0 8 self.lastModifiedDate}.${self.shortRev or "dirty"}";
           overlay = self: super:
             with self;
