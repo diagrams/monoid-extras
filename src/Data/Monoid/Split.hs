@@ -37,7 +37,7 @@ import Data.Foldable
 import Data.Semigroup
 import Data.Traversable
 
-import Data.Monoid.Action
+import Data.Monoid.Action.LeftAction
 
 infix 5 :|
 
@@ -82,8 +82,8 @@ unsplit :: Semigroup m => Split m -> m
 unsplit (M m)      = m
 unsplit (m1 :| m2) = m1 <> m2
 
--- | By default, the action of a split monoid is the same as for
+-- | By default, the left action of a split monoid is the same as for
 --   the underlying monoid, as if the split were removed.
-instance Action m n => Action (Split m) n where
-  act (M m) n      = act m n
-  act (m1 :| m2) n = act m1 (act m2 n)
+instance LeftAction m n => LeftAction (Split m) n where
+  leftAct (M m) n      = leftAct m n
+  leftAct (m1 :| m2) n = leftAct m1 (leftAct m2 n)
