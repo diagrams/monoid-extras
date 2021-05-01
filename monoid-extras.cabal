@@ -1,5 +1,5 @@
 name:                monoid-extras
-version:             0.5.1
+version:             0.6
 synopsis:            Various extra monoid-related definitions and utilities
 description:         Various extra monoid-related definitions and utilities,
                      such as monoid actions, monoid coproducts, semi-direct
