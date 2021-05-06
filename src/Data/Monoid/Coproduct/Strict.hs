@@ -6,9 +6,6 @@
 {-# LANGUAGE RankNTypes            #-}
 {-# LANGUAGE TypeOperators         #-}
 
--- For GHC-7.4
-{-# LANGUAGE UndecidableInstances  #-}
-
 -----------------------------------------------------------------------------
 -- |
 -- Module      :  Data.Monoid.Coproduct.Strict
