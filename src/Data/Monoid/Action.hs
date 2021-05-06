@@ -64,9 +64,9 @@ instance Action () l where
   act () = id
 
 -- | @Nothing@ acts as the identity; @Just m@ acts as @m@.
-instance Action m s => Action (Option m) s where
-  act (Option Nothing)  s = s
-  act (Option (Just m)) s = act m s
+instance Action m s => Action (Maybe m) s where
+  act Nothing  s = s
+  act (Just m) s = act m s
 
 -- | @Endo@ acts by application.
 --

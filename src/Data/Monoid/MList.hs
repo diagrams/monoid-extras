@@ -44,7 +44,6 @@ module Data.Monoid.MList
 
 import           Control.Arrow
 import           Data.Monoid.Action
-import           Data.Semigroup
 
 -- $mlist
 --
@@ -58,10 +57,10 @@ import           Data.Semigroup
 infixr 5 :::
 infixr 5 *:
 
-type a ::: l = (Option a, l)
+type a ::: l = (Maybe a, l)
 
 (*:) :: a -> l -> a ::: l
-a *: l = (Option (Just a), l)
+a *: l = (Just a, l)
 
 -- MList -----------------------------------
 
@@ -77,7 +76,7 @@ instance MList () where
   empty     = ()
 
 instance MList l => MList (a ::: l) where
-  empty   = (Option Nothing, empty)
+  empty   = (Nothing, empty)
 
 -- Embedding -------------------------------------------
 
@@ -89,22 +88,22 @@ class l :>: a where
 
   -- | Get the value of type @a@ from a heterogeneous list, if there
   --   is one.
-  get  :: l -> Option a
+  get  :: l -> Maybe a
 
   -- | Alter the value of type @a@ by applying the given function to it.
-  alt  :: (Option a -> Option a) -> l -> l
+  alt  :: (Maybe a -> Maybe a) -> l -> l
 
 #if __GLASGOW_HASKELL__ >= 710
 instance {-# OVERLAPPING #-} MList t => (:>:) (a ::: t) a where
 #else
 instance MList t => (:>:) (a ::: t) a where
 #endif
-  inj a = (Option (Just a), empty)
+  inj a = (Just a, empty)
   get   = fst
   alt   = first
 
 instance (t :>: a) => (:>:) (b ::: t) a where
-  inj a = (Option Nothing, inj a)
+  inj a = (Nothing, inj a)
   get   = get . snd
   alt   = second . alt
 
@@ -129,6 +128,6 @@ instance (Action (SM a) l2, Action l1 l2) => Action (a, l1) l2 where
 instance Action (SM a) () where
   act _ _ = ()
 
-instance (Action a a', Action (SM a) l) => Action (SM a) (Option a', l) where
-  act (SM a) (Option Nothing,   l) = (Option Nothing, act (SM a) l)
-  act (SM a) (Option (Just a'), l) = (Option (Just (act a a')), act (SM a) l)
+instance (Action a a', Action (SM a) l) => Action (SM a) (Maybe a', l) where
+  act (SM a) (Nothing,   l) = (Nothing, act (SM a) l)
+  act (SM a) (Just a', l) = (Just (act a a'), act (SM a) l)
