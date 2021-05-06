@@ -16,8 +16,8 @@
 --
 -- Make semigroups under 'min' or 'max' into monoids by adjoining an
 -- element corresponding to infinity (positive or negative,
--- respectively). These types are similar to @Option (Min a)@ and
--- @Option (Max a)@ respectively, except that the 'Ord' instance
+-- respectively). These types are similar to @Maybe (Min a)@ and
+-- @Maybe (Max a)@ respectively, except that the 'Ord' instance
 -- matches the 'Monoid' instance.
 --
 -----------------------------------------------------------------------------

@@ -38,7 +38,7 @@ import           Data.Monoid.WithSemigroup
 import           Data.Semigroup
 import           Prelude
 
--- Internal strict version of 'Data.Semigroup.Option'
+-- Internal strict version of Maybe
 data Possible a = Only !a | Nought
 
 instance Semigroup a => Semigroup (Possible a) where
