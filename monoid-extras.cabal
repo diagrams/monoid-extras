@@ -35,10 +35,15 @@ library
                      Data.Monoid.Recommend,
                      Data.Monoid.Split,
                      Data.Monoid.WithSemigroup
+                     Data.Monoid.Partial
 
   build-depends:     base >= 4.11 && < 4.16,
                      groups < 0.6,
-                     semigroupoids >= 4.0 && < 5.4
+                     semigroupoids >= 4.0 && < 5.4,
+                     containers,
+                     deepseq,
+                     text,
+                     bytestring
 
   hs-source-dirs:    src
 
