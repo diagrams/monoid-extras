@@ -58,6 +58,9 @@ instance Semigroup a => Semigroup (Recommend a) where
   Commit a    <> Recommend _ = Commit a
   Commit a    <> Commit b    = Commit (a <> b)
 
+  stimes n (Recommend m) = Recommend (stimes n m)
+  stimes n (Commit    m) = Commit    (stimes n m)
+
 instance (Semigroup a, Monoid a) => Monoid (Recommend a) where
   mappend = (<>)
   mempty  = Recommend mempty

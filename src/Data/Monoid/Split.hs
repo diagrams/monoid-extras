@@ -67,6 +67,10 @@ instance Semigroup m => Semigroup (Split m) where
   (m1  :| m2)  <> (M m2')      = m1                :| m2 <> m2'
   (m11 :| m12) <> (m21 :| m22) = m11 <> m12 <> m21 :| m22
 
+  stimes n (M m     ) = M (stimes n m)
+  stimes 1 (m       ) = m
+  stimes n (m1 :| m2) = m1 <> stimes (pred n) (m2 <> m1) :| m2
+
 instance (Semigroup m, Monoid m) => Monoid (Split m) where
   mempty  = M mempty
   mappend = (<>)
