@@ -77,6 +77,13 @@ instance Semigroup m => Semigroup (Deletable m) where
     | l1 <  r2  = Deletable (r1 + r2 - l1) m2 l2
     | otherwise = Deletable r1 m1 (l2 + l1 - r2)
 
+  stimes n (Deletable r m l)
+    | r == l    = Deletable r (stimes n m) l
+    | l <  r    = Deletable (i*(r-l) + l) m l
+    | otherwise = Deletable r m (i*(l-r) + r)
+    where
+      i = fromIntegral n :: Int
+
 instance (Semigroup m, Monoid m) => Monoid (Deletable m) where
   mempty = Deletable 0 mempty 0
   mappend = (<>)

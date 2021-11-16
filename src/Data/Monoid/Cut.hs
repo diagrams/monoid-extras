@@ -61,6 +61,9 @@ instance Semigroup m => Semigroup (Cut m) where
   (m1  :||: m2) <> (Uncut m2')   = m1        :||: m2 <> m2'
   (m11 :||: _)  <> (_ :||: m22)  = m11       :||: m22
 
+  stimes n (Uncut m) = Uncut (stimes n m)
+  stimes n (m      ) = m
+
 instance (Semigroup m, Monoid m) => Monoid (Cut m) where
   mempty  = Uncut mempty
   mappend = (<>)
