@@ -1,5 +1,6 @@
 name:                monoid-extras
 version:             0.6.1
+x-revision:          1
 synopsis:            Various extra monoid-related definitions and utilities
 description:         Various extra monoid-related definitions and utilities,
                      such as monoid actions, monoid coproducts, semi-direct
@@ -55,7 +56,7 @@ benchmark semi-direct-product
   hs-source-dirs: benchmarks
   main-is: SemiDirectProduct.hs
   type: exitcode-stdio-1.0
-  build-depends: base          >= 4.3 &&  < 4.16
+  build-depends: base          >= 4.3 &&  < 4.17
                , semigroups
                , criterion
                , monoid-extras
