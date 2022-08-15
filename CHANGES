@@ -4,6 +4,9 @@
   instances.  Thanks to BlackCapCoder for the patch!
 - Allow `base-4.16` and test on GHC 9.2.1.
 
+- r1: allow `base-4.16` in benchmarks
+- r2 (15 August 2022): allow `base-4.17` and test with GHC 9.4.
+
 * 0.6: 8 May 2021
 
 - Updates for GHC 8.10 and 9.0.
