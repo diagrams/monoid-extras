@@ -85,6 +85,18 @@ instance Action m s => Action (Maybe m) s where
 instance Action (Endo a) a where
   act = appEndo
 
+instance Num a => Action Integer (Sum a) where
+  n `act` a = fromInteger n <> a
+
+instance Num a => Action Integer (Product a) where
+  n `act` a = fromInteger n <> a
+
+instance Fractional a => Action Rational (Sum a) where
+  n `act` a = Sum (fromRational n) <> a
+
+instance Fractional a => Action Rational (Product a) where
+  n `act` a = Product (fromRational n) <> a
+
 -- | An action of a group is "free transitive", "regular", or a "torsor"
 --   iff it is invertible.
 --
