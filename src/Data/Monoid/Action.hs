@@ -14,9 +14,13 @@
 
 module Data.Monoid.Action
        ( Action(..)
+       , Regular(..)
+       , Conjugate(..)
+       , Torsor(..)
        ) where
 
 import           Data.Semigroup
+import           Data.Group
 
 ------------------------------------------------------------
 --  Monoid and semigroup actions
@@ -81,3 +85,33 @@ instance Action m s => Action (Maybe m) s where
 instance Action (Endo a) a where
   act = appEndo
 
+-- | An action of a group is "free transitive", "regular", or a "torsor"
+--   iff it is invertible.
+--
+--   Given a value `s2` that has been acted upon by `m`,
+--   and the original value `s1`, it is possible to recover the acting `m`.
+--   This is encoded in the laws:
+--
+--   * @(m `'act'` s) `'difference'` s = m@
+--   * @(s1 `'difference'` s2) `'act'` s2 = s1@
+class Group m => Torsor m s where
+
+  -- | @'difference' s1 s2@ is the element @m@ such that @s1 = m `'act'` s2@.
+  difference :: s -> s -> m
+
+-- | Any monoid acts on itself by left multiplication.
+--   This newtype witnesses this action:
+--   @'getRegular' $ 'Regular' m1 `'act'` 'Regular' m2 = m1 '<>' m2@
+newtype Regular m = Regular { getRegular :: m }
+
+instance Semigroup m => Action m (Regular m) where
+  m1 `act` Regular m2 = Regular $ m1 <> m2
+
+instance Group m => Torsor m (Regular m) where
+  Regular m1 `difference` Regular m2 = m1 ~~ m2
+
+-- | Any group acts on itself by conjugation.
+newtype Conjugate m = Conjugate { getConjugate :: m }
+
+instance Group m => Action m (Conjugate m) where
+  m1 `act` Conjugate m2 = Conjugate $ m1 <> m2 ~~ m1
