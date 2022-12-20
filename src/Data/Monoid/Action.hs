@@ -100,15 +100,16 @@ instance Fractional a => Action Rational (Product a) where
 -- | An action of a group is "free transitive", "regular", or a "torsor"
 --   iff it is invertible.
 --
---   Given a value `s2` that has been acted upon by `m`,
---   and the original value `s1`, it is possible to recover the acting `m`.
+--   Given an original value `sOrig`, and a value `sActed` that is the result
+--   of acting on `sOrig` by some `m`,
+--   it is possible to recover this `m`.
 --   This is encoded in the laws:
 --
 --   * @(m `'act'` s) `'difference'` s = m@
---   * @(s1 `'difference'` s2) `'act'` s2 = s1@
+--   * @(sActed `'difference'` sOrig) `'act'` sOrig = sActed@
 class Group m => Torsor m s where
 
-  -- | @'difference' s1 s2@ is the element @m@ such that @s1 = m `'act'` s2@.
+  -- | @'difference' sActed sOrig@ is the element @m@ such that @sActed = m `'act'` sOrig@.
   difference :: s -> s -> m
 
 -- | Any monoid acts on itself by left multiplication.
