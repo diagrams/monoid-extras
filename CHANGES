@@ -1,3 +1,9 @@
+* 0.6.2: 20 Dec 2022
+
+- New class and newtypes in `Data.Monoid.Action` (thanks to Manuel Bärenz):
+    - `Torsor` class for transitive group actions
+    - `Regular` and `Conjugate` newtypes for groups acting on themselves
+
 * 0.6.1: 16 Nov 2021
 
 - Add more efficient `stimes` implementations for several `Semigroup`
