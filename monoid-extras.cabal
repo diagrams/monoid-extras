@@ -14,7 +14,7 @@ bug-reports:         https://github.com/diagrams/monoid-extras/issues
 category:            Data
 build-type:          Simple
 cabal-version:       >=1.10
-tested-with:         GHC ==8.4.4 || ==8.6.5 || ==8.8.4 || ==8.10.7 || ==9.0.2 || ==9.2.8 || ==9.4.7 || ==9.6.3 || ==9.8.1
+tested-with:         GHC ==8.4.4 || ==8.6.5 || ==8.8.4 || ==8.10.7 || ==9.0.2 || ==9.2.8 || ==9.4.8 || ==9.6.5 || ==9.8.2 || ==9.10.1
 
 source-repository head
   type: git
@@ -36,7 +36,7 @@ library
                      Data.Monoid.Split,
                      Data.Monoid.WithSemigroup
 
-  build-depends:     base >= 4.11 && < 4.20,
+  build-depends:     base >= 4.11 && < 4.21,
                      groups < 0.6,
                      semigroupoids >= 4.0 && < 6.1
 
@@ -55,7 +55,7 @@ benchmark semi-direct-product
   hs-source-dirs: benchmarks
   main-is: SemiDirectProduct.hs
   type: exitcode-stdio-1.0
-  build-depends: base          >= 4.3 &&  < 4.20
+  build-depends: base          >= 4.3 &&  < 4.21
                , semigroups
                , criterion
                , monoid-extras
