@@ -11,6 +11,9 @@
 - r2 (17 Oct 2023):
   - allow `base-4.19` and test on GHC 9.8.
 
+- r3 (15 May 2024):
+  - allow `base-4.20` and test on GHC 9.10.
+
 * 0.6.1: 16 Nov 2021
 
 - Add more efficient `stimes` implementations for several `Semigroup`
