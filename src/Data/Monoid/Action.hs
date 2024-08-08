@@ -19,8 +19,12 @@ module Data.Monoid.Action
        , Torsor(..)
        ) where
 
+import           Data.Functor.Identity (Identity(Identity))
 import           Data.Semigroup
+import qualified Data.Semigroup as Semigroup
 import           Data.Group
+import qualified Data.Monoid as Monoid
+import           Data.Void (Void, absurd)
 
 ------------------------------------------------------------
 --  Monoid and semigroup actions
@@ -128,3 +132,17 @@ newtype Conjugate m = Conjugate { getConjugate :: m }
 
 instance Group m => Action m (Conjugate m) where
   m1 `act` Conjugate m2 = Conjugate $ m1 <> m2 ~~ m1
+
+instance Action (Semigroup.First a) a where
+  act (Semigroup.First m) _ = m
+
+instance Action (Monoid.First a) a where 
+  act (Monoid.First m) s = case m of
+    Nothing -> s
+    Just m' -> m'
+
+instance Action Void a where
+  act = absurd
+
+instance Action m s => Action (Identity m) s where
+  act (Identity m) = act m
