@@ -1,3 +1,10 @@
+* 0.6.3: 8 August 2024
+
+- New instances (thanks to Clinton Mead):
+  - `Action (First a) a`
+  - `Action Void a`
+  - `Action m a => Action (Identity m) a`
+
 * 0.6.2: 20 Dec 2022
 
 - New class and newtypes in `Data.Monoid.Action` (thanks to Manuel Bärenz):
