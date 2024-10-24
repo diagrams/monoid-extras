@@ -33,6 +33,7 @@ library
                      Data.Monoid.Inf,
                      Data.Monoid.MList,
                      Data.Monoid.Recommend,
+                     Data.Monoid.Set,
                      Data.Monoid.Split,
                      Data.Monoid.WithSemigroup
 
