@@ -33,9 +33,7 @@ instance Semigroup (Set a) where
   l <> Unset = l
   _ <> r     = r
 
-  stimes n s
-    | n < 1 = Unset
-    | let   = s
+  stimes = stimesIdempotentMonoid
 
 instance Monoid (Set a) where
   mempty = Unset
