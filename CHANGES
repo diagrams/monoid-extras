@@ -5,6 +5,9 @@
   - `Action Void a`
   - `Action m a => Action (Identity m) a`
 
+- r1 (27 Jan 2025):
+  - Allow `base-4.21` and test on GHC 9.12.
+
 * 0.6.2: 20 Dec 2022
 
 - New class and newtypes in `Data.Monoid.Action` (thanks to Manuel Bärenz):
