@@ -1,3 +1,7 @@
+* 0.6.4: 10 February 2025
+
+- New instance `Action m a => Action [m] a` (thanks to Manuel Bärenz for the suggestion)
+
 * 0.6.3: 8 August 2024
 
 - New instances (thanks to Clinton Mead):
