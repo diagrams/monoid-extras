@@ -76,6 +76,10 @@ instance Action m s => Action (Maybe m) s where
   act Nothing  s = s
   act (Just m) s = act m s
 
+-- | @act [a,b,c,...] = act a . act b . act c . ...@
+instance Action m s => Action [m] s where
+  act = flip (foldr act)
+
 -- | @Endo@ acts by application.
 --
 --   Note that in order for this instance to satisfy the @Action@
