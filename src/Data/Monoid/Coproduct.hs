@@ -2,6 +2,7 @@
 {-# LANGUAGE FlexibleInstances     #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE TypeOperators         #-}
+{-# LANGUAGE LambdaCase #-}
 
 -----------------------------------------------------------------------------
 -- |
@@ -24,6 +25,7 @@ module Data.Monoid.Coproduct
        ) where
 
 import Data.Either        (lefts, rights)
+import Data.Function      (on)
 import Data.Semigroup
 import Data.Typeable
 
@@ -36,6 +38,16 @@ import Data.Monoid.Action
 --   when possible.
 newtype m :+: n = MCo { unMCo :: [Either m n] }
   deriving (Typeable, Show)
+
+instance (Eq m, Eq n, Semigroup m, Semigroup n) => Eq (m :+: n) where
+  (==) = (==) `on` (normalize . unMCo)
+
+normalize :: (Semigroup m, Semigroup n) => [Either m n] -> [Either m n]
+normalize = \case
+  (Left e1:Left e2 : es) -> normalize (Left (e1 <> e2) : es)
+  (Right e1:Right e2:es) -> normalize (Right (e1 <> e2) : es)
+  []  -> []
+  (e:es) -> e : normalize es
 
 -- For efficiency and simplicity, we implement it just as [Either m
 -- n]: of course, this does not preserve the invariant of strictly
@@ -57,17 +69,6 @@ mappendL = mappend . inL
 -- | Prepend a value from the right monoid.
 mappendR :: n -> m :+: n -> m :+: n
 mappendR = mappend . inR
-
-{-
-normalize :: (Monoid m, Monoid n) => m :+: n -> m :+: n
-normalize (MCo es) = MCo (normalize' es)
-  where normalize' []  = []
-        normalize' [e] = [e]
-        normalize' (Left e1:Left e2 : es) = normalize' (Left (e1 <> e2) : es)
-        normalize' (Left e1:es) = Left e1 : normalize' es
-        normalize' (Right e1:Right e2:es) = normalize' (Right (e1 <> e2) : es)
-        normalize' (Right e1:es) = Right e1 : normalize' es
--}
 
 instance Semigroup (m :+: n) where
   (MCo es1) <> (MCo es2) = MCo (es1 ++ es2)
