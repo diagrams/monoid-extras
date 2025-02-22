@@ -20,6 +20,7 @@ module Data.Monoid.Coproduct
        , inL, inR
        , mappendL, mappendR
        , killL, killR
+       , toAltList
        , untangle
 
        ) where
@@ -42,6 +43,14 @@ newtype m :+: n = MCo { unMCo :: [Either m n] }
 instance (Eq m, Eq n, Semigroup m, Semigroup n) => Eq (m :+: n) where
   (==) = (==) `on` (normalize . unMCo)
 
+-- | Extract a monoid coproduct to a list of @Either@ values.  The
+--   resulting list is guaranteed to be normalized, in the sense that
+--   it will strictly alternate between @Left@ and @Right@.
+toAltList :: (Semigroup m, Semigroup n) => (m :+: n) -> [Either m n]
+toAltList (MCo ms) = normalize ms
+
+-- Normalize a list of @Either@ values by combining any consecutive
+-- values of the same type.
 normalize :: (Semigroup m, Semigroup n) => [Either m n] -> [Either m n]
 normalize = \case
   (Left e1:Left e2 : es) -> normalize (Left (e1 <> e2) : es)
