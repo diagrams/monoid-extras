@@ -1,3 +1,8 @@
+* 0.6.5: 22 February 2025
+
+- New instance `Eq (m :+: n)` ([#59](https://github.com/diagrams/monoid-extras/issues/59))
+- New function `toAltList :: (m :+: n) -> [Either m n]`
+
 * 0.6.4: 10 February 2025
 
 - New instance `Action m a => Action [m] a` (thanks to Manuel Bärenz for the suggestion)
