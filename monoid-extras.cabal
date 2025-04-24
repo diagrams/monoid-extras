@@ -34,7 +34,8 @@ library
                      Data.Monoid.MList,
                      Data.Monoid.Recommend,
                      Data.Monoid.Split,
-                     Data.Monoid.WithSemigroup
+                     Data.Monoid.WithSemigroup,
+                     Data.Semigroup.Coproduct
 
   build-depends:     base >= 4.11 && < 4.22,
                      groups < 0.6,
