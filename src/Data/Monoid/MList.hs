@@ -122,10 +122,16 @@ instance (t :>: a) => (:>:) (b ::: t) a where
 newtype SM m = SM m
                deriving Show
 
-instance (Action (SM a) l2, Action l1 l2) => Action (a, l1) l2 where
+instance Semigroup a => Semigroup (SM a) where
+  SM x <> SM y = SM (x <> y)
+
+instance Monoid a => Monoid (SM a) where
+  mempty = SM mempty
+
+instance (Semigroup a, Action (SM a) l2, Action l1 l2) => Action (a, l1) l2 where
   act (a,l) = act (SM a) . act l
 
-instance Action (SM a) () where
+instance Semigroup a => Action (SM a) () where
   act _ _ = ()
 
 instance (Action a a', Action (SM a) l) => Action (SM a) (Maybe a', l) where

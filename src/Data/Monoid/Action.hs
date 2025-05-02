@@ -61,7 +61,7 @@ import           Data.Void (Void, absurd)
 --   instance of the form @Action m SomeType@ since it will overlap
 --   with instances of the form @Action SomeMonoid t@.  Newtype
 --   wrappers can be used to (awkwardly) get around this.
-class Action m s where
+class Semigroup m => Action m s where
 
   -- | Convert a value of type @m@ to an action on @s@ values.
   act :: m -> s -> s
@@ -93,17 +93,11 @@ instance Action m s => Action [m] s where
 instance Action (Endo a) a where
   act = appEndo
 
-instance Num a => Action Integer (Sum a) where
-  n `act` a = fromInteger n <> a
+instance Num a => Action (Sum a) a where
+  a `act` n =  getSum (a <> Sum n)
 
-instance Num a => Action Integer (Product a) where
-  n `act` a = fromInteger n <> a
-
-instance Fractional a => Action Rational (Sum a) where
-  n `act` a = Sum (fromRational n) <> a
-
-instance Fractional a => Action Rational (Product a) where
-  n `act` a = Product (fromRational n) <> a
+instance Num a => Action (Product a) a where
+  a `act` n =  getProduct (a <> Product n)
 
 -- | An action of a group is "free transitive", "regular", or a "torsor"
 --   iff it is invertible.
