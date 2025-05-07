@@ -48,9 +48,13 @@ normalize = \case
     e2 : es2 -> (e1 :| []) <> normalize (e2 :| es2)
     [] -> e1 :| []
 
--- | Universal map of the coproduct. Both functions in the signature
---   should be semigroup homomorphisms. The name @cop@ is an abbreviation
---   for copairing.
+-- | Universal map of the coproduct. The name @cop@ is an abbreviation
+--   for copairing. Both functions in the signature should be semigroup
+--   homomorphisms. If they are general functions then tha coparining may
+--   not be well defined in the sense that it may send equal elements to
+--   unequal elements. This is also the reason why @cop@ is not the
+--   @Data.Bifoldable1.bifoldMap1@ function even though they have the same
+--   signature.
 cop :: Semigroup k => (m -> k) -> (n -> k) -> (m :+. n) -> k
 f `cop` g = foldMap1 (either f g) . unSCo
 

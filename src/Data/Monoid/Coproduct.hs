@@ -82,9 +82,13 @@ normalizeEq es = until (all nonIdentity) reduce (normalize es)
 -- alternating types, but it doesn't really matter as long as we don't
 -- let anyone inspect the internal representation.
 
--- | Universal map of the coproduct. Both functions in the signature
---   should be monoid homomorphisms. The name @cop@ is an abbreviation
---   for copairing.
+-- | Universal map of the coproduct. The name @cop@ is an abbreviation
+--   for copairing. Both functions in the signature should be monoid
+--   homomorphisms. If they are general functions then tha coparining may
+--   not be well defined in the sense that it may send equal elements to
+--   unequal elements. This is also the reason why @cop@ is not the
+--   @Data.Bifoldable.bifoldMap@ function even though they have the same
+--   signature.
 cop :: Monoid k => (m -> k) -> (n -> k) -> (m :+: n) -> k
 f `cop` g = foldMap (either f g) . unMCo
 
