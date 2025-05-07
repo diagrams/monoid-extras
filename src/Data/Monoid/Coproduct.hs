@@ -84,7 +84,7 @@ normalizeEq es = until (all nonIdentity) reduce (normalize es)
 
 -- | Universal map of the coproduct. The name @cop@ is an abbreviation
 --   for copairing. Both functions in the signature should be monoid
---   homomorphisms. If they are general functions then tha coparining may
+--   homomorphisms. If they are general functions then the copairing may
 --   not be well defined in the sense that it may send equal elements to
 --   unequal elements. This is also the reason why @cop@ is not the
 --   @Data.Bifoldable.bifoldMap@ function even though they have the same
