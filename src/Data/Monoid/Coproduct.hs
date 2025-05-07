@@ -69,7 +69,7 @@ normalize = \case
   (e:es) -> e : normalize es
 
 
--- Similar to @normalize@. In additin to combining consecutive values of the same
+-- Similar to @normalize@. In addition to combining consecutive values of the same
 -- type it also removes the identities.
 normalizeEq :: (Eq m, Eq n, Monoid m, Monoid n) => [Either m n] -> [Either m n]
 normalizeEq es = until (all nonIdentity) reduce (normalize es)
