@@ -26,7 +26,6 @@ library
                      Data.Monoid.SemiDirectProduct,
                      Data.Monoid.SemiDirectProduct.Strict
                      Data.Monoid.Coproduct,
-                     Data.Monoid.Coproduct.Strict,
                      Data.Monoid.Cut,
                      Data.Monoid.Deletable,
                      Data.Monoid.Endomorphism,
@@ -34,7 +33,8 @@ library
                      Data.Monoid.MList,
                      Data.Monoid.Recommend,
                      Data.Monoid.Split,
-                     Data.Monoid.WithSemigroup
+                     Data.Monoid.WithSemigroup,
+                     Data.Semigroup.Coproduct
 
   build-depends:     base >= 4.11 && < 4.22,
                      groups < 0.6,
