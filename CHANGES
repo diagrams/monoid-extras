@@ -8,6 +8,8 @@
 - New module `Data.Semigroup.Coproduct` with semigroup coproducts
 - Remove `Data.Monoid.Coproduct.Strict`
 
+Thanks to Sonat Süer (@sonatsuer) for the updates!
+
 * 0.6.5: 22 February 2025
 
 - New instance `Eq (m :+: n)` ([#59](https://github.com/diagrams/monoid-extras/issues/59))
