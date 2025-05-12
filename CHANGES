@@ -1,3 +1,13 @@
+* 0.7: 12 May 2025
+
+- Updates to `Data.Monoid.Coproduct`:
+    - Fix `Eq` instance for monoid coproducts to take `mempty` into account
+    - `cop` implements coproduct universal map
+    - `untangleSemi`, like `untangle` but as a monoid homomorphism to semidirect product
+    - `toReducedAltList`, like `toAltList` but also gets rid of `mempty`
+- New module `Data.Semigroup.Coproduct` with semigroup coproducts
+- Remove `Data.Monoid.Coproduct.Strict`
+
 * 0.6.5: 22 February 2025
 
 - New instance `Eq (m :+: n)` ([#59](https://github.com/diagrams/monoid-extras/issues/59))
