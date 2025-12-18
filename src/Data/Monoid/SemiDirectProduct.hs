@@ -24,6 +24,15 @@ import           Data.Monoid.Action
 --   We think of the @m@ values as a "tag" decorating the @s@ values,
 --   which also affect the way the @s@ values combine.
 --
+--   NOTE: this is only a valid semigroup/monoid if the action of @m@
+--   on @s@ satisfies BOTH:
+--
+--     1. @act@ is a monoid/semigroup homomorphism from @m@ to @(s ->
+--       s)@, that is, @act mempty = id@ and @act (m1 <> m2) = act m1
+--       . act m2@
+--     2. @act m@ is a monoid/semigroup homomorphism for any @m@, that is,
+--       @act m mempty = mempty@ and @act m (s1 <> s2) = act m s1 <> act m s2@.
+--
 --   We call the monoid @m@ the quotient monoid and the monoid @s@ the
 --   sub-monoid of the semi-direct product. The semi-direct product
 --   @Semi s m@ is an extension of the monoid @s@ with @m@ being the
