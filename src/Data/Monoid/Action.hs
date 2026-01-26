@@ -39,11 +39,15 @@ import           Data.Void (Void, absurd)
 --   * @act (m1 \`mappend\` m2) = act m1 . act m2@
 --
 --   Semigroup instances are required to satisfy the second law but with
---   ('<>') instead of 'mappend'.  Additionally, if the type @s@ has
---   any algebraic structure, @act m@ should be a homomorphism.  For
---   example, if @s@ is also a monoid we should have @act m mempty =
---   mempty@ and @act m (s1 \`mappend\` s2) = (act m s1) \`mappend\`
---   (act m s2)@.
+--   ('<>') instead of 'mappend'.
+--
+--   Additionally, if the type @s@ has any algebraic structure, @act
+--   m@ should typically be a homomorphism.  For example, if @s@ is
+--   also a monoid we should have @act m mempty = mempty@ and @act m
+--   (s1 \`mappend\` s2) = (act m s1) \`mappend\` (act m s2)@.  In
+--   particular, these laws are necessary for the semidirect product
+--   @Semi s m@ to be a valid semigroup/monoid.  For a more
+--   fine-grained treatment of these ideas, see the @lr-acts@ package.
 --
 --   By default, @act = const id@, so for a type @M@ which should have
 --   no action on anything, it suffices to write
@@ -123,7 +127,11 @@ class Group m => Torsor m s where
 -- | Any monoid acts on itself by left multiplication.
 --   This newtype witnesses this action:
 --   @'getRegular' $ 'Regular' m1 `'act'` 'Regular' m2 = m1 '<>' m2@
-newtype Regular m = Regular { getRegular :: m }
+--
+--   Note that this typically does NOT satisfy the distributivity law
+--   @m `act` (m1 <> m2) = (m `act` m1) <> (m `act` m2)@, and hence
+--   cannot be used to form a lawful semidirect product of a monoid with itself.
+newtype Regular m = Regular {getRegular :: m}
 
 instance Semigroup m => Action m (Regular m) where
   m1 `act` Regular m2 = Regular $ m1 <> m2

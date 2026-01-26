@@ -33,6 +33,9 @@ import           Data.Monoid.Action
 --     2. @act m@ is a monoid/semigroup homomorphism for any @m@, that is,
 --       @act m mempty = mempty@ and @act m (s1 <> s2) = act m s1 <> act m s2@.
 --
+--   For a more fine-grained treatment of these ideas, see the
+--   @lr-acts@ package.
+--
 --   We call the monoid @m@ the quotient monoid and the monoid @s@ the
 --   sub-monoid of the semi-direct product. The semi-direct product
 --   @Semi s m@ is an extension of the monoid @s@ with @m@ being the
